@@ -1,0 +1,7 @@
+{
+  "name": "vxmlgenerator_xp",
+  "main": "main.go",
+  "repository": "https://github.com/Lailanater/VXMLGenerator_XP.git",
+  "author": "Chris Lail <chrislail56@gmail.com>",
+  "license": "MIT"
+}
