@@ -1,11 +1,12 @@
 import React from 'react';
-import css from "css/Header.css";
+import "./css/Header.css";
 
 function Header() {
     return (
-        <div className="Header">
-            <h1>Arc</h1>
-        </div>
+        <header className="Header">
+            <h1>Ether</h1>
+            <h4>VXML Generator</h4>
+        </header>
     );
 }
 
