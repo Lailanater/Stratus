@@ -49,5 +49,8 @@ main.js.map
 
 .idea
 npm-debug.log.*
-*.iml
-VXMLGenerator.properties
+__snapshots__
+
+# Package.json
+package.json
+.travis.yml
