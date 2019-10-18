@@ -9,6 +9,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "cross-env": "^6.0.3",
+    "electron-is-dev": "^1.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1"
@@ -18,8 +20,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder build -c.extraMetadata.main=build/electron.js"
+    "dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "prepackage": "yarn build",
+    "package": "electron-builder build -c.extraMetadata.main=build/electron.js"
   },
   "build": {
     "files": [
@@ -46,7 +49,9 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^5.0.0",
     "electron": "^6.0.12",
-    "electron-builder": "^21.2.0"
+    "electron-builder": "^21.2.0",
+    "wait-on": "^3.3.0"
   }
 }
