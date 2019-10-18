@@ -2,3 +2,6 @@
 .idea
 *.exe
 VXMLGenerator.properties
+build
+dist
+node_modules
