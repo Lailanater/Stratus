@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from "react-redux";
 
 import Header from "../components/Header";
-import HomePage from "./HomePage";
+import CurrentPage from "./CurrentPage";
 
 const mapStateToProps = state => {
     return {
@@ -30,7 +30,7 @@ class Theming extends Component {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Header/>
-                <HomePage/>
+                <CurrentPage />
             </ThemeProvider>
         );
     }
