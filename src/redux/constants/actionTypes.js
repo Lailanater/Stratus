@@ -1,1 +1,2 @@
 export const TOGGLE_APP_MENU = 'TOGGLE_APP_MENU';
+export const TOGGLE_THEME = 'TOGGLE_THEME';
