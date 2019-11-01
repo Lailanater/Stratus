@@ -1,32 +1,66 @@
-import React from 'react';
-import {AppBar, Toolbar, Typography, useTheme} from "@material-ui/core";
-import {Brightness3, Brightness7} from "@material-ui/icons";
+import React, {Component} from 'react';
+import {
+    AppBar,
+    Divider,
+    Drawer,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/Button";
+import {connect} from "react-redux";
+import {toggleAppMenu} from "../redux/actions/actionCreators";
+import SettingsIcon from '@material-ui/icons/Settings';
 
-function Header() {
-	const theme = useTheme();
+const mapStateToProps = state => {
+    return {
+        isAppMenuDisplayed: state.isAppMenuDisplayed
+    };
+};
 
-	function displayThemeButton() {
-		console.log(theme.palette.type);
-		console.log(typeof theme.palette.type);
-		if (theme.palette.type === "light") {
-			return <Brightness7 />;
-		}
-		else {
-			return <Brightness3 />;
-		}
-	}
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleAppMenu: () => {
+            dispatch(toggleAppMenu());
+        }
+    };
+};
 
-	return (
-		<AppBar position="fixed">
-			<Toolbar>
-				<Typography variant="h5">
-					VXML Generator
-				</Typography>
-				<IconButton aria-label="Switch Theme" color="inherit">{displayThemeButton()}</IconButton>
-			</Toolbar>
-		</AppBar>
-	);
+class Header extends Component {
+
+    render() {
+        return (
+            <div>
+                <AppBar position="fixed">
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.props.toggleAppMenu}>
+                            <MenuIcon/>
+                        </IconButton>
+                        <Typography variant="h5">
+                            VXML Generator
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer open={this.props.isAppMenuDisplayed} onClose={this.props.toggleAppMenu}>
+                    <List>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <SettingsIcon/>
+                            </ListItemIcon>
+                            <ListItemText>
+                                Settings
+                            </ListItemText>
+                        </ListItem>
+                        <Divider/>
+                    </List>
+                </Drawer>
+            </div>
+        );
+    }
 }
 
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
