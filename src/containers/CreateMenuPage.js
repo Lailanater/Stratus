@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
-import {Button, Paper, Step, StepLabel, Stepper} from "@material-ui/core";
+import {Button, Paper, Radio, Step, StepLabel, Stepper, Typography} from "@material-ui/core";
 import {withSnackbar} from "notistack";
 import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 class CreateMenuPage extends Component {
     constructor(props) {
@@ -52,7 +57,22 @@ class CreateMenuPage extends Component {
     step2() {
         return (
             <div>
-                This is step 2
+
+                <InputLabel>
+                    How many DTMF option will you need?
+                </InputLabel>
+                <Select labelWidth="500px">
+                    <MenuItem value={0}>0</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                    <MenuItem value={7}>7</MenuItem>
+                    <MenuItem value={8}>8</MenuItem>
+                    <MenuItem value={9}>9</MenuItem>
+                </Select>
             </div>
         );
     }
@@ -61,7 +81,23 @@ class CreateMenuPage extends Component {
     step3() {
         return (
             <div>
-                This is step 3
+                <Typography>
+                    Will you need a repeat option?
+                </Typography>
+                <RadioGroup>
+                    <FormControlLabel
+                        value="yes"
+                        control={<Radio color="secondary"/>}
+                        label="Yes"
+                        labelPlacement="start"
+                    />
+                    <FormControlLabel
+                        value="no"
+                        control={<Radio color="secondary"/>}
+                        label="No"
+                        labelPlacement="start"
+                    />
+                </RadioGroup>
             </div>
         );
     }
@@ -74,11 +110,26 @@ class CreateMenuPage extends Component {
         );
     }
 
-
     step5() {
         return (
             <div>
-                This is step 5
+                <Typography>
+                    When you default route on this menu where should you go?
+                </Typography>
+                <RadioGroup>
+                    <FormControlLabel
+                        value="calltype"
+                        control={<Radio color="secondary"/>}
+                        label="Calltype"
+                        labelPlacement="start"
+                    />
+                    <FormControlLabel
+                        value="menu"
+                        control={<Radio color="secondary"/>}
+                        label="Menu"
+                        labelPlacement="start"
+                    />
+                </RadioGroup>
             </div>
         );
     }
