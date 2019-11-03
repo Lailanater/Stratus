@@ -26,7 +26,7 @@ class Header extends Component {
                         </IconButton>
                         <Link to="/" style={{textDecoration: "none", color: "white"}}>
                             <Typography variant="h5">
-                                VXML Generator
+                                Stratus
                             </Typography>
                         </Link>
                     </Toolbar>

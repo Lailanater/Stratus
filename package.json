@@ -1,5 +1,5 @@
 {
-  "name": "vxmlgenerator_xp",
+  "name": "stratus",
   "version": "0.1.0",
   "main": "public/electron.js",
   "repository": "https://github.com/Lailanater/VXMLGenerator_XP.git",
