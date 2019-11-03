@@ -2,19 +2,61 @@ import React, {Component} from 'react';
 import {Button, Paper, Radio, Step, StepLabel, Stepper, Typography} from "@material-ui/core";
 import {withSnackbar} from "notistack";
 import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import Slider from "@material-ui/core/Slider";
 
 class CreateMenuPage extends Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
             activeStep: 0
         };
+
+        this.marks = [
+            {
+                value: 0,
+                label: '0',
+            },
+            {
+                value: 1,
+                label: '1',
+            },
+            {
+                value: 2,
+                label: '2',
+            },
+            {
+                value: 3,
+                label: '3',
+            },
+            {
+                value: 4,
+                label: '4',
+            },
+            {
+                value: 5,
+                label: '5',
+            },
+            {
+                value: 6,
+                label: '6',
+            },
+            {
+                value: 7,
+                label: '7',
+            },
+            {
+                value: 8,
+                label: '8',
+            },
+            {
+                value: 9,
+                label: '9',
+            },
+        ];
 
         this.goBack = this.goBack.bind(this);
         this.goNext = this.goNext.bind(this);
@@ -25,26 +67,26 @@ class CreateMenuPage extends Component {
     getStepContent(activeStep) {
         switch (activeStep) {
             case 0: {
-                return this.step1();
+                return this.getMenuName();
             }
             case 1: {
-                return this.step2();
+                return this.selectDtmfOptions();
             }
             case 2: {
-                return this.step3();
+                return this.needsRepeatOption();
             }
             case 3: {
-                return this.step4();
+                return this.setDtmfOptions();
             }
             case 4: {
-                return this.step5();
+                return this.setDefaultRouteOptionType();
             }
             default:
-                return this.step1();
+                return this.getMenuName();
         }
     }
 
-    step1() {
+    getMenuName() {
         return (
             <TextField
                 label="Menu Name"
@@ -54,31 +96,25 @@ class CreateMenuPage extends Component {
         );
     }
 
-    step2() {
+    selectDtmfOptions() {
         return (
             <div>
-
-                <InputLabel>
-                    How many DTMF option will you need?
-                </InputLabel>
-                <Select labelWidth="500px">
-                    <MenuItem value={0}>0</MenuItem>
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={6}>6</MenuItem>
-                    <MenuItem value={7}>7</MenuItem>
-                    <MenuItem value={8}>8</MenuItem>
-                    <MenuItem value={9}>9</MenuItem>
-                </Select>
+                <Typography id="discrete-slider-custom" gutterBottom>
+                    Custom marks
+                </Typography>
+                <Slider
+                    defaultValue={0}
+                    step={1}
+                    valueLabelDisplay="auto"
+                    max={9}
+                    marks={this.marks}
+                />
             </div>
         );
     }
 
 
-    step3() {
+    needsRepeatOption() {
         return (
             <div>
                 <Typography>
@@ -102,7 +138,7 @@ class CreateMenuPage extends Component {
         );
     }
 
-    step4() {
+    setDtmfOptions() {
         return (
             <div>
                 This is step 4
@@ -110,7 +146,7 @@ class CreateMenuPage extends Component {
         );
     }
 
-    step5() {
+    setDefaultRouteOptionType() {
         return (
             <div>
                 <Typography>
