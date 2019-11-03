@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {FormControlLabel, Switch} from "@material-ui/core";
 import {toggleTheme} from "../redux/actions/actionCreators";
 import {connect} from "react-redux";
+import { Paper } from "@material-ui/core";
 
 const mapStateToProps = state => {
     return {
@@ -20,7 +21,11 @@ const mapDispatchToProps = dispatch => {
 class SettingsPage extends Component {
     render() {
         return (
-            <FormControlLabel control={<Switch checked={this.props.theme === "dark"} onChange={this.props.toggleTheme}/>} label="Dark Theme"/>
+            <Paper>
+                <FormControlLabel
+                    control={<Switch checked={this.props.theme === "dark"} onChange={this.props.toggleTheme}/>}
+                    label="Dark Theme"/>
+            </Paper>
         );
     }
 }

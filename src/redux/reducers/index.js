@@ -1,4 +1,4 @@
-import {SET_CURRENT_PAGE, SET_CURRENT_PROJECT, TOGGLE_APP_MENU, TOGGLE_THEME} from "../constants/actionTypes";
+import {SET_CURRENT_PROJECT, TOGGLE_APP_MENU, TOGGLE_THEME} from "../constants/actionTypes";
 import {initialState} from "../store";
 
 function rootReducer(state = initialState, action) {
@@ -16,10 +16,6 @@ function rootReducer(state = initialState, action) {
             }
             return Object.assign({}, state, {
                 theme: choice
-            });
-        case SET_CURRENT_PAGE:
-            return Object.assign({}, state, {
-                currentPage: action.nextPage
             });
         case SET_CURRENT_PROJECT:
             return Object.assign({}, state, {

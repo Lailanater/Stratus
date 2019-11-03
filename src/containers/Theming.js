@@ -7,7 +7,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from "react-redux";
 
 import Header from "../components/Header";
-import CurrentPage from "./CurrentPage";
+import {BrowserRouter, Route} from "react-router-dom";
+import HomePage from "./HomePage";
+import SettingsPage from "./SettingsPage";
+import AddProjectPage from "./AddProjectPage";
 
 const mapStateToProps = state => {
     return {
@@ -28,9 +31,13 @@ class Theming extends Component {
         console.log(theme);
         return (
             <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Header/>
-                <CurrentPage />
+                <CssBaseline/>
+                <BrowserRouter>
+                    <Header/>
+                    <Route exact path="/" component={HomePage}/>
+                    <Route path="/settings" component={SettingsPage}/>
+                    <Route path="/addProject" component={AddProjectPage}/>
+                </BrowserRouter>
             </ThemeProvider>
         );
     }

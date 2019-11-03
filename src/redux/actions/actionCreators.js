@@ -1,4 +1,4 @@
-import {SET_CURRENT_PAGE, TOGGLE_APP_MENU, TOGGLE_THEME, SET_CURRENT_PROJECT} from "../constants/actionTypes";
+import {TOGGLE_APP_MENU, TOGGLE_THEME, SET_CURRENT_PROJECT} from "../constants/actionTypes";
 
 export function toggleAppMenu() {
     return {
@@ -9,13 +9,6 @@ export function toggleAppMenu() {
 export function toggleTheme() {
     return {
         type: TOGGLE_THEME
-    };
-}
-
-export function setCurrentPage(nextPage) {
-    return {
-        type: SET_CURRENT_PAGE,
-        nextPage
     };
 }
 
