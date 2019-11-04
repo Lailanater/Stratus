@@ -12,6 +12,7 @@ import HomePage from "./HomePage";
 import SettingsPage from "./SettingsPage";
 import AddProjectPage from "./AddProjectPage";
 import CreateGrammarPage from "./CreateGrammarPage";
+import CreateMenuPage from "./CreateMenuPage";
 import {SnackbarProvider} from "notistack";
 
 const mapStateToProps = state => {
@@ -41,6 +42,7 @@ class Theming extends Component {
                         <Route path="/settings" component={SettingsPage}/>
                         <Route path="/addProject" component={AddProjectPage}/>
                         <Route path="/createGrammar" component={CreateGrammarPage}/>
+                        <Route path="/createMenu" component={CreateMenuPage}/>
                     </BrowserRouter>
                 </SnackbarProvider>
             </ThemeProvider>
