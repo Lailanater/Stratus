@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Slider from "@material-ui/core/Slider";
+import {Link} from "react-router-dom";
 
 class CreateMenuPage extends Component {
 
@@ -216,9 +217,11 @@ class CreateMenuPage extends Component {
                         Previous
                     </Button>
                     {this.state.activeStep === 4 ?
-                        <Button variant="contained" color="primary" onClick={this.createMenu}>
-                            Finish
-                        </Button>
+                        <Link to="/">
+                            <Button variant="contained" color="primary" onClick={this.createMenu}>
+                                Finish
+                            </Button>
+                        </Link>
                         :
                         <Button variant="contained" color="secondary" onClick={this.goNext}>
                             Next
