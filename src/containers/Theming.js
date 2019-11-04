@@ -11,6 +11,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import HomePage from "./HomePage";
 import SettingsPage from "./SettingsPage";
 import AddProjectPage from "./AddProjectPage";
+import CreateGrammarPage from "./CreateGrammarPage";
+import {SnackbarProvider} from "notistack";
 
 const mapStateToProps = state => {
     return {
@@ -31,13 +33,16 @@ class Theming extends Component {
         console.log(theme);
         return (
             <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <BrowserRouter>
-                    <Header/>
-                    <Route exact path="/" component={HomePage}/>
-                    <Route path="/settings" component={SettingsPage}/>
-                    <Route path="/addProject" component={AddProjectPage}/>
-                </BrowserRouter>
+                <SnackbarProvider maxSnack={2}>
+                    <CssBaseline/>
+                    <BrowserRouter>
+                        <Header/>
+                        <Route exact path="/" component={HomePage}/>
+                        <Route path="/settings" component={SettingsPage}/>
+                        <Route path="/addProject" component={AddProjectPage}/>
+                        <Route path="/createGrammar" component={CreateGrammarPage}/>
+                    </BrowserRouter>
+                </SnackbarProvider>
             </ThemeProvider>
         );
     }
