@@ -92,6 +92,7 @@ class CreateMenuPage extends Component {
                 label="Menu Name"
                 margin="normal"
                 variant="outlined"
+                required={true}
             />
         );
     }
@@ -100,7 +101,7 @@ class CreateMenuPage extends Component {
         return (
             <div>
                 <Typography id="discrete-slider-custom" gutterBottom>
-                    Custom marks
+                    How many options are you going to need?
                 </Typography>
                 <Slider
                     defaultValue={0}
