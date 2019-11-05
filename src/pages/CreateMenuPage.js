@@ -1,93 +1,82 @@
-import React, {Component} from 'react';
-import {Button, Paper, Radio, Step, StepLabel, Stepper, Typography} from "@material-ui/core";
-import {withSnackbar} from "notistack";
+import React, { useState } from 'react';
+import { Button, Paper, Radio, Step, StepLabel, Stepper, Typography } from "@material-ui/core";
+import { withSnackbar } from "notistack";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Slider from "@material-ui/core/Slider";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-class CreateMenuPage extends Component {
+const CreateMenuPage = (props) => {
 
-    constructor(props) {
-        super(props);
+    const [activeStep, setActiveStep] = useState(0);
 
-        this.state = {
-            activeStep: 0
-        };
+    const marks = [
+        {
+            value: 0,
+            label: '0',
+        },
+        {
+            value: 1,
+            label: '1',
+        },
+        {
+            value: 2,
+            label: '2',
+        },
+        {
+            value: 3,
+            label: '3',
+        },
+        {
+            value: 4,
+            label: '4',
+        },
+        {
+            value: 5,
+            label: '5',
+        },
+        {
+            value: 6,
+            label: '6',
+        },
+        {
+            value: 7,
+            label: '7',
+        },
+        {
+            value: 8,
+            label: '8',
+        },
+        {
+            value: 9,
+            label: '9',
+        },
+    ];
 
-        this.marks = [
-            {
-                value: 0,
-                label: '0',
-            },
-            {
-                value: 1,
-                label: '1',
-            },
-            {
-                value: 2,
-                label: '2',
-            },
-            {
-                value: 3,
-                label: '3',
-            },
-            {
-                value: 4,
-                label: '4',
-            },
-            {
-                value: 5,
-                label: '5',
-            },
-            {
-                value: 6,
-                label: '6',
-            },
-            {
-                value: 7,
-                label: '7',
-            },
-            {
-                value: 8,
-                label: '8',
-            },
-            {
-                value: 9,
-                label: '9',
-            },
-        ];
-
-        this.goBack = this.goBack.bind(this);
-        this.goNext = this.goNext.bind(this);
-        this.createMenu = this.createMenu.bind(this);
-    }
-
-
-    getStepContent(activeStep) {
+    function getStepContent(activeStep) {
         switch (activeStep) {
             case 0: {
-                return this.getMenuName();
+                return getMenuName();
             }
             case 1: {
-                return this.selectDtmfOptions();
+                return selectDtmfOptions();
             }
             case 2: {
-                return this.needsRepeatOption();
+                return needsRepeatOption();
             }
             case 3: {
-                return this.setDtmfOptions();
+                return setDtmfOptions();
             }
             case 4: {
-                return this.setDefaultRouteOptionType();
+                return setDefaultRouteOptionType();
             }
             default:
-                return this.getMenuName();
+                return getMenuName();
         }
     }
 
-    getMenuName() {
+    function getMenuName() {
         return (
             <TextField
                 label="Menu Name"
@@ -98,7 +87,7 @@ class CreateMenuPage extends Component {
         );
     }
 
-    selectDtmfOptions() {
+    function selectDtmfOptions() {
         return (
             <div>
                 <Typography id="discrete-slider-custom" gutterBottom>
@@ -109,14 +98,14 @@ class CreateMenuPage extends Component {
                     step={1}
                     valueLabelDisplay="auto"
                     max={9}
-                    marks={this.marks}
+                    marks={marks}
                 />
             </div>
         );
     }
 
 
-    needsRepeatOption() {
+    function needsRepeatOption() {
         return (
             <div>
                 <Typography>
@@ -140,7 +129,7 @@ class CreateMenuPage extends Component {
         );
     }
 
-    setDtmfOptions() {
+    function setDtmfOptions() {
         return (
             <div>
                 This is step 4
@@ -148,7 +137,7 @@ class CreateMenuPage extends Component {
         );
     }
 
-    setDefaultRouteOptionType() {
+    function setDefaultRouteOptionType() {
         return (
             <div>
                 <Typography>
@@ -172,65 +161,57 @@ class CreateMenuPage extends Component {
         );
     }
 
-    goBack() {
-        this.setState({
-            activeStep: this.state.activeStep - 1
-        });
+    function goBack() {
+        setActiveStep(activeStep - 1);
     }
 
-    goNext() {
-        this.setState({
-            activeStep: this.state.activeStep + 1
-        }, () => {
-            console.log(this.state);
-        });
+    function goNext() {
+        setActiveStep(activeStep + 1);
     }
 
-    createMenu() {
-        this.props.enqueueSnackbar("Menu was successfully created!", {variant: "success", autoHideDuration: 2000});
+    function createMenu() {
+        props.enqueueSnackbar("Menu was successfully created!", {variant: "success", autoHideDuration: 2000});
     }
 
-    render() {
-        return (
-            <div>
-                <Stepper activeStep={this.state.activeStep}>
-                    <Step>
-                        <StepLabel>Give The Menu a Name</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Select DTMF Options</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Repeat?</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Set DTMF Option Types</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Set Default Route Option Type</StepLabel>
-                    </Step>
-                </Stepper>
-                <Paper>
-                    {this.getStepContent(this.state.activeStep)}
-                    <br/>
-                    <Button variant="contained" onClick={this.goBack} disabled={this.state.activeStep === 0}>
-                        Previous
-                    </Button>
-                    {this.state.activeStep === 4 ?
-                        <Link to="/">
-                            <Button variant="contained" color="primary" onClick={this.createMenu}>
-                                Finish
-                            </Button>
-                        </Link>
-                        :
-                        <Button variant="contained" color="secondary" onClick={this.goNext}>
-                            Next
+    return (
+        <div>
+            <Stepper activeStep={activeStep}>
+                <Step>
+                    <StepLabel>Give The Menu a Name</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Select DTMF Options</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Repeat?</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Set DTMF Option Types</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Set Default Route Option Type</StepLabel>
+                </Step>
+            </Stepper>
+            <Paper>
+                {getStepContent(activeStep)}
+                <br/>
+                <Button variant="contained" onClick={goBack} disabled={activeStep === 0}>
+                    Previous
+                </Button>
+                {activeStep === 4 ?
+                    <Link to="/">
+                        <Button variant="contained" color="primary" onClick={createMenu}>
+                            Finish
                         </Button>
-                    }
-                </Paper>
-            </div>
-        );
-    }
-}
+                    </Link>
+                    :
+                    <Button variant="contained" color="secondary" onClick={goNext}>
+                        Next
+                    </Button>
+                }
+            </Paper>
+        </div>
+    );
+};
 
 export default withSnackbar(CreateMenuPage);

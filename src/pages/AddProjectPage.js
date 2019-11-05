@@ -1,65 +1,56 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {Paper, Typography} from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 
-class AddProjectPage extends Component {
-    constructor(props) {
-        super(props);
+const AddProjectPage = (props) => {
 
-        this.setDefaultProjectName = this.setDefaultProjectName.bind(this);
-    }
-
-
-    setDefaultProjectName() {
+    function setDefaultProjectName() {
         console.log(document.querySelector("#project-name-input").value);
-        document.querySelector("#project-name-input").value = this.getTextAfterLastBackSlash();
+        document.querySelector("#project-name-input").value = getTextAfterLastBackSlash();
     }
 
-    getTextAfterLastBackSlash() {
+    function getTextAfterLastBackSlash() {
         let path = document.querySelector("#project-path-input").value;
         let backslashIndex = path.lastIndexOf("\\");
 
         return path.substr(backslashIndex + 1, path.length);
     }
 
-    render() {
+    return (
+        <Paper>
+            <Typography variant="h6">
+                Project Path
+            </Typography>
+            <TextField
+                id="project-path-input"
+                margin="normal"
+                variant="outlined"
+                onChange={setDefaultProjectName}
+            />
 
-        return (
-            <Paper>
-                <Typography variant="h6">
-                    Project Path
-                </Typography>
-                <TextField
-                    id="project-path-input"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.setDefaultProjectName}
-                />
+            <Button variant="contained">
+                Select directory...
+            </Button>
 
-                <Button variant="contained">
-                    Select directory...
-                </Button>
+            <br/>
 
-                <br />
+            <Typography variant="h6">
+                Project Name
+            </Typography>
+            <TextField
+                id="project-name-input"
+                margin="normal"
+                variant="outlined"
+            />
 
-                <Typography variant="h6">
-                    Project Name
-                </Typography>
-                <TextField
-                    id="project-name-input"
-                    margin="normal"
-                    variant="outlined"
-                />
+            <br/>
 
-                <br />
-
-                <Button variant="contained" color="secondary">
-                    Add Project
-                </Button>
-            </Paper>
-        );
-    }
-}
+            <Button variant="contained" color="secondary">
+                Add Project
+            </Button>
+        </Paper>
+    );
+};
 
 export default AddProjectPage;

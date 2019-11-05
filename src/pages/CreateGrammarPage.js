@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Stepper from "@material-ui/core/Stepper";
@@ -11,88 +11,75 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
-import {withSnackbar} from "notistack";
-import {Link} from "react-router-dom";
+import { withSnackbar } from "notistack";
+import { Link } from "react-router-dom";
 
-class CreateGrammarPage extends Component {
-    constructor(props) {
-        super(props);
+const CreateGrammarPage = (props) => {
 
-        this.state = {
-            activeStep: 0,
-            needsDTMF: false,
-            needsVoice: false
-        };
+    const [activeStep, setActiveStep] = useState(0);
+    const [needsDTMF, setNeedsDTMF] = useState(false);
+    const [needsVoice, setNeedsVoice] = useState(false);
 
-        this.marks = [
-            {
-                value: 0,
-                label: '0',
-            },
-            {
-                value: 1,
-                label: '1',
-            },
-            {
-                value: 2,
-                label: '2',
-            },
-            {
-                value: 3,
-                label: '3',
-            },
-            {
-                value: 4,
-                label: '4',
-            },
-            {
-                value: 5,
-                label: '5',
-            },
-            {
-                value: 6,
-                label: '6',
-            },
-            {
-                value: 7,
-                label: '7',
-            },
-            {
-                value: 8,
-                label: '8',
-            },
-            {
-                value: 9,
-                label: '9',
-            },
-        ];
+    const marks = [
+        {
+            value: 0,
+            label: '0',
+        },
+        {
+            value: 1,
+            label: '1',
+        },
+        {
+            value: 2,
+            label: '2',
+        },
+        {
+            value: 3,
+            label: '3',
+        },
+        {
+            value: 4,
+            label: '4',
+        },
+        {
+            value: 5,
+            label: '5',
+        },
+        {
+            value: 6,
+            label: '6',
+        },
+        {
+            value: 7,
+            label: '7',
+        },
+        {
+            value: 8,
+            label: '8',
+        },
+        {
+            value: 9,
+            label: '9',
+        },
+    ];
 
-        this.getStepContent = this.getStepContent.bind(this);
-        this.goBack = this.goBack.bind(this);
-        this.goNext = this.goNext.bind(this);
-        this.createGrammar = this.createGrammar.bind(this);
-        this.selectGrammarType = this.selectGrammarType.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-
-    getStepContent(activeStep) {
+    function getStepContent(activeStep) {
         switch (activeStep) {
             case 0: {
-                return this.getGrammarName();
+                return getGrammarName();
             }
             case 1: {
-                return this.selectDtmfOptions();
+                return selectDtmfOptions();
             }
             case 2: {
-                return this.selectGrammarType();
+                return selectGrammarType();
             }
             default:
-                return this.getGrammarName();
+                return getGrammarName();
         }
     }
 
-    getGrammarName() {
+    function getGrammarName() {
         return (
             <TextField
                 label="Menu Name"
@@ -103,7 +90,7 @@ class CreateGrammarPage extends Component {
         );
     }
 
-    selectDtmfOptions() {
+    function selectDtmfOptions() {
         return (
             <div>
                 <Typography id="discrete-slider-custom" gutterBottom>
@@ -114,53 +101,43 @@ class CreateGrammarPage extends Component {
                     step={1}
                     valueLabelDisplay="auto"
                     max={9}
-                    marks={this.marks}
+                    marks={marks}
                 />
             </div>
         );
     }
 
-    goBack() {
-        this.setState({
-            activeStep: this.state.activeStep - 1
-        });
+    function goBack() {
+        setActiveStep(activeStep - 1);
     }
 
-    goNext() {
-        this.setState({
-            activeStep: this.state.activeStep + 1
-        }, () => {
-            console.log(this.state);
-        });
+    function goNext() {
+        setActiveStep(activeStep + 1);
     }
 
-    createGrammar() {
-        this.props.enqueueSnackbar("Grammar was successfully created!", {variant: "success", autoHideDuration: 2000});
+    function createGrammar() {
+        props.enqueueSnackbar("Grammar was successfully created!", {variant: "success", autoHideDuration: 2000});
     }
 
-    handleChange(event) {
+    function handleChange(event) {
         if (event.currentTarget.value === "dtmf") {
-            this.setState({
-                needsDTMF: !this.state.needsDTMF
-            });
+            setNeedsDTMF(!needsDTMF);
         } else {
-            this.setState({
-                needsVoice: !this.state.needsVoice
-            });
+            setNeedsVoice(!needsVoice);
         }
     }
 
-    selectGrammarType() {
+    function selectGrammarType() {
         return (
             <FormControl component="fieldset">
                 <Typography>Which Type(s) of Grammars Do You Need?</Typography>
                 <FormGroup>
                     <FormControlLabel
-                        control={<Checkbox checked={this.state.needsDTMF} onChange={this.handleChange} value="dtmf"/>}
+                        control={<Checkbox checked={needsDTMF} onChange={handleChange} value="dtmf"/>}
                         label="DTMF"
                     />
                     <FormControlLabel
-                        control={<Checkbox checked={this.state.needsVoice} onChange={this.handleChange} value="voice"/>}
+                        control={<Checkbox checked={needsVoice} onChange={handleChange} value="voice"/>}
                         label="Voice"
                     />
                 </FormGroup>
@@ -168,41 +145,39 @@ class CreateGrammarPage extends Component {
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Stepper activeStep={this.state.activeStep}>
-                    <Step>
-                        <StepLabel>Enter The Name of The Menu to Make Grammar(s) for</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Select DTMF Options</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Select Type of Grammar(s)</StepLabel>
-                    </Step>
-                </Stepper>
-                <Paper>
-                    {this.getStepContent(this.state.activeStep)}
-                    <br/>
-                    <Button variant="contained" onClick={this.goBack} disabled={this.state.activeStep === 0}>
-                        Previous
-                    </Button>
-                    {this.state.activeStep === 2 ?
-                        <Link to="/">
-                            <Button variant="contained" color="primary" onClick={this.createGrammar}>
-                                Finish
-                            </Button>
-                        </Link>
-                        :
-                        <Button variant="contained" color="secondary" onClick={this.goNext}>
-                            Next
+    return (
+        <div>
+            <Stepper activeStep={activeStep}>
+                <Step>
+                    <StepLabel>Enter The Name of The Menu to Make Grammar(s) for</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Select DTMF Options</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Select Type of Grammar(s)</StepLabel>
+                </Step>
+            </Stepper>
+            <Paper>
+                {getStepContent(activeStep)}
+                <br/>
+                <Button variant="contained" onClick={goBack} disabled={activeStep === 0}>
+                    Previous
+                </Button>
+                {activeStep === 2 ?
+                    <Link to="/">
+                        <Button variant="contained" color="primary" onClick={createGrammar}>
+                            Finish
                         </Button>
-                    }
-                </Paper>
-            </div>
-        );
-    }
-}
+                    </Link>
+                    :
+                    <Button variant="contained" color="secondary" onClick={goNext}>
+                        Next
+                    </Button>
+                }
+            </Paper>
+        </div>
+    );
+};
 
 export default withSnackbar(CreateGrammarPage);

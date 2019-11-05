@@ -1,33 +1,19 @@
-import React, {Component} from 'react';
-import {FormControlLabel, Switch} from "@material-ui/core";
-import {toggleTheme} from "../redux/actions/actionCreators";
-import {connect} from "react-redux";
-import { Paper } from "@material-ui/core";
+import React from 'react';
+import { FormControlLabel, Paper, Switch } from "@material-ui/core";
+import { toggleTheme } from "../redux/actions/actionCreators";
+import { useDispatch, useSelector } from "react-redux";
 
-const mapStateToProps = state => {
-    return {
-        theme: state.theme
-    };
+const SettingsPage = (props) => {
+    const theme = useSelector(state => state.theme);
+    const dispatch = useDispatch();
+
+    return (
+        <Paper>
+            <FormControlLabel
+                control={<Switch checked={theme === "dark"} onChange={() => dispatch(toggleTheme())}/>}
+                label="Dark Theme"/>
+        </Paper>
+    );
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        toggleTheme: () => {
-            dispatch(toggleTheme());
-        }
-    };
-};
-
-class SettingsPage extends Component {
-    render() {
-        return (
-            <Paper>
-                <FormControlLabel
-                    control={<Switch checked={this.props.theme === "dark"} onChange={this.props.toggleTheme}/>}
-                    label="Dark Theme"/>
-            </Paper>
-        );
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
+export default SettingsPage;
