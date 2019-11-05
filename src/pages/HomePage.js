@@ -1,11 +1,11 @@
 import React from 'react';
 import ButtonMenu from "../components/ButtonMenu";
-import CurrentProjectDropdown from "../components/CurrentProjectDropdown"
+import CurrentProjectDropdown from "../components/CurrentProjectDropdown";
 
 const HomePage = (props) => {
     return (
         <div>
-            <CurrentProjectDropdown />l
+            <CurrentProjectDropdown/>
             <ButtonMenu/>
         </div>
     );
