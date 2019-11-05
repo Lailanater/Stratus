@@ -8,8 +8,10 @@ import { Link } from "react-router-dom";
 
 const StepForm = (props) => {
     const [activeStep, setActiveStep] = useState(0);
+
     const firstStep = 0;
     const lastStep = props.steps.length - 1;
+    const currentStepComponent = props.steps[activeStep].component;
 
     function goBack() {
         setActiveStep(activeStep - 1);
@@ -25,7 +27,7 @@ const StepForm = (props) => {
         if (activeStep === lastStep) {
             return (
                 <Link to="/">
-                    <Button variant="contained" color="primary" onClick={props.onClick}>
+                    <Button variant="contained" color="primary" onClick={props.onSubmit}>
                         Finish
                     </Button>
                 </Link>
@@ -49,7 +51,7 @@ const StepForm = (props) => {
                 )}
             </Stepper>
             <Paper>
-                {props.steps[activeStep].component}
+                {currentStepComponent}
                 <br/>
                 <Button variant="contained" onClick={goBack} disabled={activeStep === firstStep}>
                     Previous

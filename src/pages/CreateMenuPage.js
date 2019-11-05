@@ -91,7 +91,7 @@ const CreateMenuPage = (props) => {
     }
 
     return (
-        <StepForm steps={steps} onClick={createMenu}/>
+        <StepForm steps={steps} onSubmit={createMenu}/>
     );
 };
 

@@ -68,7 +68,7 @@ const CreateGrammarPage = (props) => {
     }
 
     return (
-        <StepForm steps={steps} onClick={createGrammar}/>
+        <StepForm steps={steps} onSubmit={createGrammar}/>
     );
 };
 
