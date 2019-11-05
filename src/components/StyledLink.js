@@ -1,40 +1,26 @@
-import React, {Component} from 'react';
-import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-import { toggleAppMenu } from "../redux/actions/actionCreators"
+import React from 'react';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAppMenu } from "../redux/actions/actionCreators";
 
-const mapStateToProps = state => {
-    return {
-        theme: state.theme
-    };
-};
+const StyledLink = (props) => {
+    const theme = useSelector(state => state.theme);
+    const dispatch = useDispatch();
 
-const mapDispatchToProps = dispatch => {
-    return {
-        toggleAppMenu: () => {
-            return dispatch(toggleAppMenu());
-        }
-    }
-}
-
-class StyledLink extends Component {
-
-    getTextColor() {
-        if (this.props.theme === "dark") {
+    function getTextColor() {
+        if (theme === "dark") {
             return "white";
         } else {
             return "black";
         }
     }
 
-    render() {
-        return (
-            <Link to={this.props.to} style={{textDecoration: "none", color: this.getTextColor()}}
-                  onClick={this.props.toggleAppMenu}>
-                {this.props.children}
-            </Link>
-        );
-    }
-}
+    return (
+        <Link to={props.to} style={{textDecoration: "none", color: getTextColor()}}
+              onClick={() => dispatch(toggleAppMenu())}>
+            {props.children}
+        </Link>
+    );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(StyledLink);
+export default StyledLink;
