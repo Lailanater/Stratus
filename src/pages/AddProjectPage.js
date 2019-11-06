@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { Paper, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addProject } from "../redux/actions/actionCreators";
+import { Link } from "react-router-dom";
 
 const AddProjectPage = (props) => {
 
@@ -56,9 +57,11 @@ const AddProjectPage = (props) => {
 
             <br/>
 
+            <Link to="/">
             <Button variant="contained" color="secondary" onClick={handleOnClick}>
                 Add Project
             </Button>
+            </Link>
         </Paper>
     );
 };
