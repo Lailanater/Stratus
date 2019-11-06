@@ -4,7 +4,8 @@ import rootReducer from "./reducers";
 export const initialState = {
     isAppMenuDisplayed: false,
     theme: "dark",
-    currentProject: "ScrumF_TestApplication"
+    currentProject: "",
+    projects: []
 };
 
 export default createStore(rootReducer);

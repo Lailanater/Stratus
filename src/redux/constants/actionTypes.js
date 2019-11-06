@@ -1,3 +1,4 @@
 export const TOGGLE_APP_MENU = 'TOGGLE_APP_MENU';
 export const TOGGLE_THEME = 'TOGGLE_THEME';
 export const SET_CURRENT_PROJECT = "SET_CURRENT_PROJECT";
+export const ADD_PROJECT = "ADD_PROJECT";

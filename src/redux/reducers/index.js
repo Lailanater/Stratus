@@ -1,4 +1,4 @@
-import {SET_CURRENT_PROJECT, TOGGLE_APP_MENU, TOGGLE_THEME} from "../constants/actionTypes";
+import { ADD_PROJECT, SET_CURRENT_PROJECT, TOGGLE_APP_MENU, TOGGLE_THEME } from "../constants/actionTypes";
 import {initialState} from "../store";
 
 function rootReducer(state = initialState, action) {
@@ -20,6 +20,10 @@ function rootReducer(state = initialState, action) {
         case SET_CURRENT_PROJECT:
             return Object.assign({}, state, {
                 currentProject: action.nextProject
+            });
+        case ADD_PROJECT:
+            return Object.assign({}, state, {
+                projects: state.projects.concat(action.newProject)
             });
         default:
             return state;

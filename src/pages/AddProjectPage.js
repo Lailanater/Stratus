@@ -2,8 +2,12 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Paper, Typography } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { addProject } from "../redux/actions/actionCreators";
 
 const AddProjectPage = (props) => {
+
+    const dispatch = useDispatch();
 
     function setDefaultProjectName() {
         console.log(document.querySelector("#project-name-input").value);
@@ -15,6 +19,12 @@ const AddProjectPage = (props) => {
         let backslashIndex = path.lastIndexOf("\\");
 
         return path.substr(backslashIndex + 1, path.length);
+    }
+
+    function handleOnClick() {
+        const projectName = document.querySelector("#project-name-input").value;
+        const projectPath = document.querySelector("#project-path-input").value;
+        dispatch(addProject(projectName, projectPath));
     }
 
     return (
@@ -46,7 +56,7 @@ const AddProjectPage = (props) => {
 
             <br/>
 
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={handleOnClick}>
                 Add Project
             </Button>
         </Paper>

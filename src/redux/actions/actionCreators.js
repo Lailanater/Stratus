@@ -1,4 +1,4 @@
-import {TOGGLE_APP_MENU, TOGGLE_THEME, SET_CURRENT_PROJECT} from "../constants/actionTypes";
+import {TOGGLE_APP_MENU, TOGGLE_THEME, SET_CURRENT_PROJECT, ADD_PROJECT} from "../constants/actionTypes";
 
 export function toggleAppMenu() {
     return {
@@ -17,4 +17,14 @@ export function setCurrentProject(nextProject) {
         type: SET_CURRENT_PROJECT,
         nextProject
     };
+}
+
+export function addProject(projectName, projectPath) {
+    return {
+        type: ADD_PROJECT,
+        newProject: {
+            name: projectName,
+            path: projectPath
+        }
+    }
 }

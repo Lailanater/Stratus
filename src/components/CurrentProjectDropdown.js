@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const CurrentProjectDropdown = (props) => {
     const currentProject = useSelector(state => state.currentProject);
+    const projects = useSelector(state => state.projects);
     const dispatch = useDispatch();
 
     function handleOnChange(e) {
@@ -16,8 +17,9 @@ const CurrentProjectDropdown = (props) => {
             <h2>Current project</h2>
             <InputLabel>Current Project</InputLabel>
             <Select value={currentProject} onChange={handleOnChange}>
-                <MenuItem value={"ScrumF_TestApplication"}>ScrumF_TestApplication</MenuItem>
-                <MenuItem value={"ALR_Inforce"}>ALR_Inforce</MenuItem>
+                {projects.map(project =>
+                    <MenuItem key={project.name.toString()} value={project}>{project.name}</MenuItem>
+                )}
             </Select>
         </div>
     );
