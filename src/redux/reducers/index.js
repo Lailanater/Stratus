@@ -2,6 +2,7 @@ import {
     ADD_PROJECT,
     SET_CURRENT_PROJECT,
     SET_DEFAULT_ROUTE_TO,
+    SET_DTMF_OPTIONS,
     SET_MENU_NAME,
     SET_NEEDS_REPEAT,
     SET_NUM_OF_OPTIONS,
@@ -45,6 +46,10 @@ function rootReducer(state = initialState, action) {
         case SET_NEEDS_REPEAT:
             return Object.assign({}, state, {
                 needsRepeat: action.needsRepeat
+            });
+        case SET_DTMF_OPTIONS:
+            return Object.assign({}, state, {
+                dtmfOptions: action.dtmfOptions
             });
         case SET_DEFAULT_ROUTE_TO:
             return Object.assign({}, state, {

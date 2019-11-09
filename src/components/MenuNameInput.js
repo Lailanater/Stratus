@@ -1,10 +1,11 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMenuName } from "../redux/actions/actionCreators";
 
 const MenuNameInput = () => {
 
+    const menuName = useSelector(state => state.menuName);
     const dispatch = useDispatch();
 
     return (
@@ -13,6 +14,7 @@ const MenuNameInput = () => {
             margin="normal"
             variant="outlined"
             required={true}
+            value={menuName}
             onChange={(e) => dispatch(setMenuName(e.target.value))}
         />
     );

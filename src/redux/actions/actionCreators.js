@@ -2,6 +2,7 @@ import {
     ADD_PROJECT,
     SET_CURRENT_PROJECT,
     SET_DEFAULT_ROUTE_TO,
+    SET_DTMF_OPTIONS,
     SET_MENU_NAME,
     SET_NEEDS_REPEAT,
     SET_NUM_OF_OPTIONS,
@@ -56,6 +57,13 @@ export function setNeedsRepeat(needsRepeat) {
     return {
         type: SET_NEEDS_REPEAT,
         needsRepeat
+    };
+}
+
+export function setDtmfOptions(dtmfOptions) {
+    return {
+        type: SET_DTMF_OPTIONS,
+        dtmfOptions
     };
 }
 
