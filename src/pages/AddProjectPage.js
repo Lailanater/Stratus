@@ -44,7 +44,7 @@ const AddProjectPage = (props) => {
                 Select directory...
             </Button>
 
-            <br/>
+            <br />
 
             <Typography variant="h6">
                 Project Name
@@ -55,12 +55,12 @@ const AddProjectPage = (props) => {
                 variant="outlined"
             />
 
-            <br/>
+            <br />
 
             <Link to="/">
-            <Button variant="contained" color="secondary" onClick={handleOnClick}>
-                Add Project
-            </Button>
+                <Button variant="contained" color="secondary" onClick={handleOnClick}>
+                    Add Project
+                </Button>
             </Link>
         </Paper>
     );

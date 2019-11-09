@@ -1,8 +1,13 @@
 import React from 'react';
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import { useDispatch, useSelector } from "react-redux";
+import { setNumOfOptions } from "../redux/actions/actionCreators";
 
 const OptionPicker = (props) => {
+
+    const numOfOptions = useSelector(state => state.numOfOptions);
+    const dispatch = useDispatch();
 
     const marks = setMarks();
 
@@ -17,17 +22,24 @@ const OptionPicker = (props) => {
         return marks;
     }
 
+    function handleChange(event, value) {
+        if (value !== numOfOptions) {
+            dispatch(setNumOfOptions(value));
+        }
+    }
+
     return (
         <div>
             <Typography id="discrete-slider-custom" gutterBottom>
                 How many options are you going to need?
             </Typography>
             <Slider
-                defaultValue={0}
+                value={numOfOptions}
                 step={1}
                 valueLabelDisplay="auto"
                 max={props.maxOptions}
                 marks={marks}
+                onChange={handleChange}
             />
         </div>
     );

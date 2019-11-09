@@ -30,14 +30,14 @@ const Theming = (props) => {
     return (
         <ThemeProvider theme={currentTheme}>
             <SnackbarProvider maxSnack={2}>
-                <CssBaseline/>
+                <CssBaseline />
                 <BrowserRouter>
-                    <Header/>
-                    <Route exact path="/" component={HomePage}/>
-                    <Route path="/settings" component={SettingsPage}/>
-                    <Route path="/addProject" component={AddProjectPage}/>
-                    <Route path="/createGrammar" component={CreateGrammarPage}/>
-                    <Route path="/createMenu" component={CreateMenuPage}/>
+                    <Header />
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/settings" component={SettingsPage} />
+                    <Route path="/addProject" component={AddProjectPage} />
+                    <Route path="/createGrammar" component={CreateGrammarPage} />
+                    <Route path="/createMenu" component={CreateMenuPage} />
                 </BrowserRouter>
             </SnackbarProvider>
         </ThemeProvider>

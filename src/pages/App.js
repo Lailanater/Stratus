@@ -10,7 +10,7 @@ function App() {
 
     return (
         <Provider store={store}>
-            <Theming/>
+            <Theming />
         </Provider>
     );
 }

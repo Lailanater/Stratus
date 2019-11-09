@@ -28,11 +28,11 @@ const CreateGrammarPage = (props) => {
             <Typography>Which Type(s) of Grammars Do You Need?</Typography>
             <FormGroup>
                 <FormControlLabel
-                    control={<Checkbox checked={needsDTMF} onChange={handleChange} value="dtmf"/>}
+                    control={<Checkbox checked={needsDTMF} onChange={handleChange} value="dtmf" />}
                     label="DTMF"
                 />
                 <FormControlLabel
-                    control={<Checkbox checked={needsVoice} onChange={handleChange} value="voice"/>}
+                    control={<Checkbox checked={needsVoice} onChange={handleChange} value="voice" />}
                     label="Voice"
                 />
             </FormGroup>
@@ -41,7 +41,7 @@ const CreateGrammarPage = (props) => {
 
     let steps = [];
     addStep("Enter The Name of The Menu to Make Grammar(s) for", grammarName);
-    addStep("Select DTMF Options", <OptionPicker maxOptions={9}/>);
+    addStep("Select DTMF Options", <OptionPicker maxOptions={9} />);
     addStep("Select Type of Grammar(s)", selectGrammarType);
 
     function createGrammar() {
@@ -68,7 +68,7 @@ const CreateGrammarPage = (props) => {
     }
 
     return (
-        <StepForm steps={steps} onSubmit={createGrammar}/>
+        <StepForm steps={steps} onSubmit={createGrammar} />
     );
 };
 

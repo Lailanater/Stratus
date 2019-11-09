@@ -1,4 +1,13 @@
-import {TOGGLE_APP_MENU, TOGGLE_THEME, SET_CURRENT_PROJECT, ADD_PROJECT} from "../constants/actionTypes";
+import {
+    ADD_PROJECT,
+    SET_CURRENT_PROJECT,
+    SET_DEFAULT_ROUTE_TO,
+    SET_MENU_NAME,
+    SET_NEEDS_REPEAT,
+    SET_NUM_OF_OPTIONS,
+    TOGGLE_APP_MENU,
+    TOGGLE_THEME
+} from "../constants/actionTypes";
 
 export function toggleAppMenu() {
     return {
@@ -26,5 +35,33 @@ export function addProject(projectName, projectPath) {
             name: projectName,
             path: projectPath
         }
-    }
+    };
+}
+
+export function setNumOfOptions(numOfOptions) {
+    return {
+        type: SET_NUM_OF_OPTIONS,
+        numOfOptions
+    };
+}
+
+export function setMenuName(menuName) {
+    return {
+        type: SET_MENU_NAME,
+        menuName
+    };
+}
+
+export function setNeedsRepeat(needsRepeat) {
+    return {
+        type: SET_NEEDS_REPEAT,
+        needsRepeat
+    };
+}
+
+export function setDefaultRouteTo(defaultRouteTo) {
+    return {
+        type: SET_DEFAULT_ROUTE_TO,
+        defaultRouteTo
+    };
 }

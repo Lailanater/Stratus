@@ -12,7 +12,7 @@ const MenuButton = (props) => {
                     {props.text}
                 </ListItemText>
             </ListItem>
-            <Divider/>
+            <Divider />
         </div>
     );
 };

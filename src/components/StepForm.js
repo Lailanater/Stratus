@@ -23,11 +23,15 @@ const StepForm = (props) => {
 
     let nextStepButton = getNextStepButton();
 
+    function sendFinishedForm() {
+        props.onSubmit();
+    }
+
     function getNextStepButton() {
         if (activeStep === lastStep) {
             return (
                 <Link to="/">
-                    <Button variant="contained" color="primary" onClick={props.onSubmit}>
+                    <Button variant="contained" color="primary" onClick={sendFinishedForm}>
                         Finish
                     </Button>
                 </Link>
@@ -52,7 +56,7 @@ const StepForm = (props) => {
             </Stepper>
             <Paper>
                 {currentStepComponent}
-                <br/>
+                <br />
                 <Button variant="contained" onClick={goBack} disabled={activeStep === firstStep}>
                     Previous
                 </Button>

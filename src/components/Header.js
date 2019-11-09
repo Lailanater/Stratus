@@ -14,8 +14,9 @@ const Header = (props) => {
         <div>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => dispatch(toggleAppMenu())}>
-                        <MenuIcon/>
+                    <IconButton edge="start" color="inherit" aria-label="menu"
+                                onClick={() => dispatch(toggleAppMenu())}>
+                        <MenuIcon />
                     </IconButton>
                     <Link to="/" style={{textDecoration: "none", color: "white"}}>
                         <Typography variant="h5">
@@ -24,7 +25,7 @@ const Header = (props) => {
                     </Link>
                 </Toolbar>
             </AppBar>
-            <SideMenu/>
+            <SideMenu />
         </div>
     );
 };

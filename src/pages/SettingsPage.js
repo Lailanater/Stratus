@@ -10,8 +10,8 @@ const SettingsPage = (props) => {
     return (
         <Paper>
             <FormControlLabel
-                control={<Switch checked={theme === "dark"} onChange={() => dispatch(toggleTheme())}/>}
-                label="Dark Theme"/>
+                control={<Switch checked={theme === "dark"} onChange={() => dispatch(toggleTheme())} />}
+                label="Dark Theme" />
         </Paper>
     );
 };
