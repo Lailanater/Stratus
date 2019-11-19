@@ -6,6 +6,9 @@ import { useDispatch } from "react-redux";
 import { addProject } from "../redux/actions/actionCreators";
 import { Link } from "react-router-dom";
 
+const path = require('path');
+const electron = window.require("electron");
+
 const AddProjectPage = (props) => {
 
     const dispatch = useDispatch();
@@ -40,7 +43,7 @@ const AddProjectPage = (props) => {
                 onChange={setDefaultProjectName}
             />
 
-            <Button variant="contained">
+            <Button variant="contained" onClick={electron.shell.showItemInFolder(__dirname)}>
                 Select directory...
             </Button>
 
