@@ -59,12 +59,12 @@ const StepForm = (props) => {
                 )}
             </Stepper>
             <Paper>
-                {currentStepComponent}
-                <br />
                 <Button variant="contained" onClick={goBack} disabled={activeStep === firstStep}>
                     Previous
                 </Button>
                 {nextStepButton}
+                <br />
+                {currentStepComponent}
             </Paper>
         </div>
     );
