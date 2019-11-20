@@ -7,12 +7,7 @@ import NeedsRepeatOptionInput from "../components/NeedsRepeatOptionInput";
 import OptionTypeView from "../components/OptionTypeView";
 import DefaultRouteTypeInput from "../components/DefaultRouteTypeInput";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    setDefaultRouteTo,
-    setDtmfOptions,
-    setMenuName,
-    setNeedsRepeat,
-} from "../redux/actions/actionCreators";
+import { setDefaultRouteTo, setDtmfOptions, setMenuName, setNeedsRepeat, } from "../redux/actions/actionCreators";
 
 const CreateMenuPage = (props) => {
 

@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import { Paper, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addProject } from "../redux/actions/actionCreators";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { withSnackbar } from "notistack";
 
 const {remote} = window.require("electron");
@@ -42,7 +42,10 @@ const AddProjectPage = (props) => {
                 dispatch(addProject(projectName, projectPath));
                 setCanRedirect(true);
             } else {
-                props.enqueueSnackbar("The path you have entered is not valid", {variant: "error", autoHideDuration: 2000});
+                props.enqueueSnackbar("The path you have entered is not valid", {
+                    variant: "error",
+                    autoHideDuration: 2000
+                });
             }
         }
 
@@ -63,7 +66,7 @@ const AddProjectPage = (props) => {
     }
 
     if (canRedirect) {
-        return <Redirect to="/" />
+        return <Redirect to="/" />;
     }
 
     return (

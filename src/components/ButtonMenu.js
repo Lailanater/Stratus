@@ -33,7 +33,7 @@ const ButtonMenu = (props) => {
     }
 
     if (canRedirect) {
-        return <Redirect to={nextPage} />
+        return <Redirect to={nextPage} />;
     }
 
     return (
@@ -42,7 +42,8 @@ const ButtonMenu = (props) => {
                     onClick={createMenu}>
                 Create Menu
             </Button>
-            <Button variant="contained" style={{color: "white", backgroundColor: "#40739e"}} size="large" onClick={createGrammar}>
+            <Button variant="contained" style={{color: "white", backgroundColor: "#40739e"}} size="large"
+                    onClick={createGrammar}>
                 Create Grammar
             </Button>
         </div>

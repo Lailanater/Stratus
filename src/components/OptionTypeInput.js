@@ -14,7 +14,7 @@ const OptionTypeInput = (props) => {
     if (dtmfOptions[props.option] === undefined) {
         let newDtmfOptions = dtmfOptions;
         newDtmfOptions[props.option] = "calltype";
-        dispatch(setDtmfOptions(newDtmfOptions))
+        dispatch(setDtmfOptions(newDtmfOptions));
     }
 
     return (
@@ -33,7 +33,7 @@ const OptionTypeInput = (props) => {
                         newDtmfOptions[props.option] = "calltype";
                         setCalltypeChecked(true);
                         setMenuChecked(false);
-                        dispatch(setDtmfOptions(newDtmfOptions))
+                        dispatch(setDtmfOptions(newDtmfOptions));
                     }}
                 />
                 <FormControlLabel
@@ -46,7 +46,7 @@ const OptionTypeInput = (props) => {
                         newDtmfOptions[props.option] = "menu";
                         setCalltypeChecked(false);
                         setMenuChecked(true);
-                        dispatch(setDtmfOptions(newDtmfOptions))
+                        dispatch(setDtmfOptions(newDtmfOptions));
                     }}
                 />
             </RadioGroup>

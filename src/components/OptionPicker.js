@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { useDispatch, useSelector } from "react-redux";
-import { setDtmfOptions, setNumOfOptions } from "../redux/actions/actionCreators";
+import { setDtmfOptions } from "../redux/actions/actionCreators";
 
 const OptionPicker = (props) => {
 
@@ -29,8 +29,7 @@ const OptionPicker = (props) => {
             for (let i = dtmfOptions.length; i < newSize; i++) {
                 newDtmfOptions[i] = "calltype";
             }
-        }
-        else if (dtmfOptions.length > newSize) {
+        } else if (dtmfOptions.length > newSize) {
             newDtmfOptions.length = newSize;
         }
         setNumOfOptions(newDtmfOptions.length);

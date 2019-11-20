@@ -5,7 +5,6 @@ import {
     SET_DTMF_OPTIONS,
     SET_MENU_NAME,
     SET_NEEDS_REPEAT,
-    SET_NUM_OF_OPTIONS,
     TOGGLE_APP_MENU,
     TOGGLE_THEME
 } from "../constants/actionTypes";
