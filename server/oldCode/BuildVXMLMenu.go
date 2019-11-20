@@ -1,4 +1,4 @@
-package server
+package oldCode
 
 import (
 	"os"
@@ -7,8 +7,8 @@ import (
 )
 
 var tagStack Stack
-var menuNameWithExtension string
-var menuName string
+var {{ .MenuName }}WithExtension string
+var {{ .MenuName }} string
 var tabs int = 0;
 
 var menuSb strings.Builder
@@ -32,14 +32,14 @@ const CATCH = "catch"
 
 func buildMenu(name string, repeatOption bool, numOfOptions int, defaultRoute string) {
 	menuSb.Reset()
-	menuNameWithExtension = name + ".vxml"
-	menuName = name
+	{{ .MenuName }}WithExtension = name + ".vxml"
+	{{ .MenuName }} = name
 	generateStandardVXMLHeading()
 	if numOfOptions > 0 {
 		generateInitForm("Prompt")
 		stringBuilderNewLine()
 		generatePromptForm()
-		buildGrammar(menuName, DTMF, repeatOption, numOfOptions)
+		buildGrammar({{ .MenuName }}, DTMF, repeatOption, numOfOptions)
 	} else {
 		generateInitForm("Logic")
 	}
@@ -54,11 +54,11 @@ func buildMenu(name string, repeatOption bool, numOfOptions int, defaultRoute st
 }
 
 func generateInitForm(next string) {
-	generateFormTag(menuName)
+	generateFormTag({{ .MenuName }})
 	generateBlockTagWithComment("pageDefinitionsBlock", "Put page specific things here")
-	generateAssignTag("stateName", "'"+menuName+"'")
+	generateAssignTag("stateName", "'"+{{ .MenuName }}+"'")
 	generateAssignTag("currentPage", "stateName + '.vxml'")
-	generateComment("nextPage defined by " + menuName + "LogicForm")
+	generateComment("nextPage defined by " + {{ .MenuName }} + "LogicForm")
 	generateScriptTag("resetPageCounters();")
 	popTagsUntil(BLOCK)
 	stringBuilderNewLine()
@@ -66,22 +66,22 @@ func generateInitForm(next string) {
 	generateSetCallEndStateTag()
 	generateScriptTag("setAppNav(stateName, 'Start Date &amp; Time = ' + getTime().normal);")
 	generateEnteredLogTag()
-	generateGoToFormTag(menuName + next)
+	generateGoToFormTag({{ .MenuName }} + next)
 	popTagsUntil(FORM)
 }
 
 func generatePromptForm() {
-	generateFormTag(menuName + "Prompt")
+	generateFormTag({{ .MenuName }} + "Prompt")
 	generateBlockTag()
 	generatePromptTag("true")
-	generateAudioTagWithTTS("", "Welcome to the "+menuName)
+	generateAudioTagWithTTS("", "Welcome to the "+{{ .MenuName }})
 	popTagsUntil(PROMPT)
-	generateGoToFormTag(menuName + "Logic")
+	generateGoToFormTag({{ .MenuName }} + "Logic")
 	popTagsUntil(FORM)
 }
 
 func generateLogicForm(repeatOption bool, numOfOptions int) {
-	generateFormTag(menuName + "Logic")
+	generateFormTag({{ .MenuName }} + "Logic")
 	if numOfOptions > 0 {
 		generateFieldTag("option")
 		generateGrammarTag(DTMF)
@@ -128,7 +128,7 @@ func generateLogicForm(repeatOption bool, numOfOptions int) {
 			generateLogTag("Repeat limit has been reached throwing state.repeat.limit")
 			generateThrowTag("state.repeat.limit")
 			generateElseTag()
-			generateGoToFormTag(menuName + "Prompt")
+			generateGoToFormTag({{ .MenuName }} + "Prompt")
 			popTagsUntil(IF)
 		}
 		popTagsUntil(IF)
@@ -256,7 +256,7 @@ func generateElseTag() {
 }
 
 func generateGrammarTag(mode string) {
-	appendToStringBuilderWithTabsAndNewLine("<grammar srcexpr=\"grammarDirectoryWithLang + '" + menuName + "_" + strings.ToUpper(mode) + ".grxml'\"")
+	appendToStringBuilderWithTabsAndNewLine("<grammar srcexpr=\"grammarDirectoryWithLang + '" + {{ .MenuName }} + "_" + strings.ToUpper(mode) + ".grxml'\"")
 	appendToStringBuilderWithTabsAndNewLine("            mode=\"" + mode + "\"")
 	appendToStringBuilderWithTabsAndNewLine("            type=\"application/srg+xml\" />")
 }
@@ -398,7 +398,7 @@ func generateStandardVXMLHeading() {
 func writeToFile() {
 	dir := settings[DIR]
 	path := dir + "/WebContent/"
-	absolutePath := path + menuNameWithExtension
+	absolutePath := path + {{ .MenuName }}WithExtension
 	file, err := os.Create(absolutePath)
 	if err != nil {
 		panic(err)

@@ -1,4 +1,4 @@
-package server
+package oldCode
 
 /*
  *	This file uses code from https://siongui.github.io/2018/01/10/go-convert-number-to-word-from-1-to-1000/ in order to translate numbers to words.
@@ -53,12 +53,12 @@ func initXmlLang() {
 	}
 }
 
-func buildGrammar(menuName string, mode string, repeat bool, numOfOptions int) {
+func buildGrammar({{ .MenuName }} string, mode string, repeat bool, numOfOptions int) {
 	grammarSb.Reset()
 	if mode == DTMF {
-		grammarFileName = menuName + "_" + strings.ToUpper(mode) + ".grxml"
+		grammarFileName = {{ .MenuName }} + "_" + strings.ToUpper(mode) + ".grxml"
 	} else if mode == VOICE {
-		grammarFileName = menuName + "_Voice" + ".grxml"
+		grammarFileName = {{ .MenuName }} + "_Voice" + ".grxml"
 	}
 	pathToGrammarFile := settings[DIR] + "/WebContent/" + settings[GRAMMAR_DIR] + grammarFileName
 	if _, err := os.Stat(pathToGrammarFile); err == nil {

@@ -1,4 +1,4 @@
-package server
+package oldCode
 
 import (
 	"fmt"
@@ -28,13 +28,13 @@ func createDTMFMenu() {
 	fmt.Println("What would you like to name the new Menu? (DO NOT ADD .VXML TO THE END)")
 	fmt.Println("Enter p to return to the main menu.")
 	fmt.Println("")
-	menuName := getMenuName()
-	menuNameWithExtension = menuName + ".vxml"
-	menuPath := settings[DIR] + "/WebContent/" + menuNameWithExtension
-	if menuName == "p" {
+	{{ .MenuName }} := get{{ .MenuName }}()
+	{{ .MenuName }}WithExtension = {{ .MenuName }} + ".vxml"
+	menuPath := settings[DIR] + "/WebContent/" + {{ .MenuName }}WithExtension
+	if {{ .MenuName }} == "p" {
 		returnToMain("")
 	} else if _, err := os.Stat(menuPath); err == nil {
-		fmt.Print(menuNameWithExtension, " already exists. Would you like to overwrite it? (y/n): ")
+		fmt.Print({{ .MenuName }}WithExtension, " already exists. Would you like to overwrite it? (y/n): ")
 		var temp string
 		fmt.Scanln(&temp)
 		if temp == "y" || temp == "yes" {
@@ -67,7 +67,7 @@ func createDTMFMenu() {
 		}
 	}
 	defaultRoute := getDefaultRouteType()
-	buildMenu(menuName, repeatOption, numOfOptions, defaultRoute)
+	buildMenu({{ .MenuName }}, repeatOption, numOfOptions, defaultRoute)
 }
 
 func getDefaultRouteType() string {
@@ -87,7 +87,7 @@ func getDefaultRouteType() string {
 	}
 }
 
-func getMenuName() string {
+func get{{ .MenuName }}() string {
 	fmt.Print("Type your menu name: ")
 	var temp string;
 	fmt.Scanln(&temp)
