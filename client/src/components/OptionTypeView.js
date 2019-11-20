@@ -8,7 +8,7 @@ const OptionTypeView = () => {
     return (
         <div>
             {dtmfOptions.map((value, index) => {
-                return <OptionTypeInput option={index} />;
+                return <OptionTypeInput key={index} option={index} />;
             })}
         </div>
     );

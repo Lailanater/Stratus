@@ -1,63 +1,20 @@
 {
   "name": "stratus",
   "version": "0.1.0",
-  "main": "public/electron.js",
+  "main": "client/public/electron.js",
   "repository": "https://github.com/Lailanater/VXMLGenerator_XP.git",
   "author": "Chris Lail <chrislail56@gmail.com>",
-  "homepage": "./",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.5.2",
-    "@material-ui/icons": "^4.5.1",
-    "bootstrap": "^4.3.1",
-    "cross-env": "^6.0.3",
-    "electron": "^7.0.0",
-    "electron-builder": "^22.1.0",
-    "electron-is-dev": "^1.1.0",
-    "notistack": "^0.9.5",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.1.2",
-    "redux": "^4.0.4"
-  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "prepackage": "yarn build",
-    "package": "electron-builder build -c.extraMetadata.main=build/electron.js"
-  },
-  "build": {
-    "files": [
-      "build/**/*",
-      "node_modules/**/*"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    }
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "concurrently": "^5.0.0",
-    "wait-on": "^3.3.0"
+    "start": "yarn workspace client start",
+    "build": "yarn workspace client build",
+    "test-client": "yarn workspace client test",
+    "dev": "yarn workspace client dev",
+    "package": "yarn workspace client package"
   }
 }

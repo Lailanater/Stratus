@@ -1,0 +1,60 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./public/electron.js",
+  "author": "Chris Lail <chrislail56@gmail.com>",
+  "description": "An application that generates VXML Code.",
+  "dependencies": {
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
+    "bootstrap": "^4.3.1",
+    "cross-env": "^6.0.3",
+    "electron-is-dev": "^1.1.0",
+    "notistack": "^0.9.5",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.1.2",
+    "redux": "^4.0.4"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/react-scripts start",
+    "build": "./node_modules/.bin/react-scripts build",
+    "test": "./node_modules/.bin/react-scripts test",
+    "dev": "./node_modules/.bin/concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "prepackage": "yarn build",
+    "package": "./node_modules/.bin/electron-builder build -c.extraMetadata.main=build/electron.js"
+  },
+  "build": {
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.0",
+    "electron": "7.0.0",
+    "electron-builder": "^22.1.0",
+    "wait-on": "^3.3.0"
+  }
+}
