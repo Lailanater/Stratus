@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 import { addProject } from "../redux/actions/actionCreators";
 import { Link } from "react-router-dom";
 
-const path = require('path');
-const electron = window.require("electron");
+const {remote} = window.require("electron");
 
 const AddProjectPage = (props) => {
 
@@ -31,6 +30,20 @@ const AddProjectPage = (props) => {
         dispatch(addProject(projectName, projectPath));
     }
 
+    function selectFolder() {
+        const options = {
+            properties: ["openDirectory"]
+        };
+
+        remote.dialog.showOpenDialog(options).then(result => {
+                const selectedDirectory = result.filePaths[0];
+
+                document.querySelector("#project-path-input").value = selectedDirectory;
+                document.querySelector("#project-name-input").value = getTextAfterLastBackSlash();
+            }
+        );
+    }
+
     return (
         <Paper>
             <Typography variant="h6">
@@ -43,7 +56,7 @@ const AddProjectPage = (props) => {
                 onChange={setDefaultProjectName}
             />
 
-            <Button variant="contained" onClick={electron.shell.showItemInFolder(__dirname)}>
+            <Button variant="contained" onClick={selectFolder}>
                 Select directory...
             </Button>
 
