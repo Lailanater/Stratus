@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Paper, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addProject } from "../redux/actions/actionCreators";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { withSnackbar } from "notistack";
 
 const {remote} = window.require("electron");
 
 const AddProjectPage = (props) => {
 
+    const [canRedirect, setCanRedirect] = useState(false);
     const dispatch = useDispatch();
 
     function setDefaultProjectName() {
@@ -27,7 +29,14 @@ const AddProjectPage = (props) => {
     function handleOnClick() {
         const projectName = document.querySelector("#project-name-input").value;
         const projectPath = document.querySelector("#project-path-input").value;
-        dispatch(addProject(projectName, projectPath));
+
+        if (projectName === "" || projectPath === "") {
+            props.enqueueSnackbar("Please update both fields first", {variant: "error", autoHideDuration: 2000});
+        } else {
+            dispatch(addProject(projectName, projectPath));
+            setCanRedirect(true);
+        }
+
     }
 
     function selectFolder() {
@@ -42,6 +51,10 @@ const AddProjectPage = (props) => {
                 document.querySelector("#project-name-input").value = getTextAfterLastBackSlash();
             }
         );
+    }
+
+    if (canRedirect) {
+        return <Redirect to="/" />
     }
 
     return (
@@ -73,13 +86,11 @@ const AddProjectPage = (props) => {
 
             <br />
 
-            <Link to="/">
-                <Button variant="contained" color="secondary" onClick={handleOnClick}>
-                    Add Project
-                </Button>
-            </Link>
+            <Button variant="contained" color="secondary" onClick={handleOnClick}>
+                Add Project
+            </Button>
         </Paper>
     );
 };
 
-export default AddProjectPage;
+export default withSnackbar(AddProjectPage);
