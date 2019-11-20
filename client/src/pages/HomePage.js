@@ -4,8 +4,9 @@ import CurrentProjectDropdown from "../components/CurrentProjectDropdown";
 
 const HomePage = (props) => {
     return (
-        <div>
+        <div className="container">
             <CurrentProjectDropdown />
+            <br />
             <ButtonMenu />
         </div>
     );

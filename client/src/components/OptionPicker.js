@@ -14,7 +14,7 @@ const OptionPicker = (props) => {
 
     function setMarks() {
         let marks = [];
-        for (let i = 0; i < props.maxOptions; i++) {
+        for (let i = 0; i <= props.maxOptions; i++) {
             marks.push({
                 value: i,
                 label: i.toString(),
@@ -48,6 +48,7 @@ const OptionPicker = (props) => {
                 How many options are you going to need?
             </Typography>
             <Slider
+                id="optionSlider"
                 value={numOfOptions}
                 step={1}
                 valueLabelDisplay="auto"

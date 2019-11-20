@@ -32,13 +32,13 @@ const StepForm = (props) => {
     function getNextStepButton() {
         if (activeStep === lastStep) {
             return (
-                <Button variant="contained" color="primary" onClick={sendFinishedForm}>
+                <Button id="nextButton" variant="contained" color="primary" onClick={sendFinishedForm}>
                     Finish
                 </Button>
             );
         } else {
             return (
-                <Button variant="contained" color="secondary" onClick={goNext}>
+                <Button id="nextButton" variant="contained" color="secondary" onClick={goNext}>
                     Next
                 </Button>
             );
@@ -58,14 +58,16 @@ const StepForm = (props) => {
                     </Step>
                 )}
             </Stepper>
-            <Paper>
+            <div className="container">
                 <Button variant="contained" onClick={goBack} disabled={activeStep === firstStep}>
                     Previous
                 </Button>
                 {nextStepButton}
                 <br />
-                {currentStepComponent}
-            </Paper>
+                <div id="stepContents">
+                    {currentStepComponent}
+                </div>
+            </div>
         </div>
     );
 };

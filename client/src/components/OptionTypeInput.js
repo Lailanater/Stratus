@@ -27,7 +27,6 @@ const OptionTypeInput = (props) => {
                     value="calltype"
                     control={<Radio color="secondary" checked={calltypeChecked} />}
                     label="Calltype"
-                    labelPlacement="start"
                     onClick={() => {
                         let newDtmfOptions = dtmfOptions;
                         newDtmfOptions[props.option] = "calltype";
@@ -40,7 +39,6 @@ const OptionTypeInput = (props) => {
                     value="menu"
                     control={<Radio color="secondary" checked={menuChecked} />}
                     label="Menu"
-                    labelPlacement="start"
                     onClick={() => {
                         let newDtmfOptions = dtmfOptions;
                         newDtmfOptions[props.option] = "menu";

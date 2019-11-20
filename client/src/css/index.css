@@ -14,3 +14,33 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.container {
+    padding: 10px;
+}
+
+#stepContents {
+    margin-top: 10px;
+}
+
+#optionSlider {
+    width: 450px;
+}
+
+#nextButton {
+    margin-left: 5px;
+}
+
+#selectDirectoryButton {
+    margin-top: 22px;
+    padding: 10px;
+    margin-left: 10px
+}
+
+#project-path-input {
+    width: 500px;
+}
+
+#project-name-input {
+    width: 350px;
+}

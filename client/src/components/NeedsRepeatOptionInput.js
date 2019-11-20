@@ -19,13 +19,11 @@ const NeedsRepeatOptionInput = () => {
                 <FormControlLabel
                     control={<Radio color="secondary" checked={needsRepeat === true} />}
                     label="Yes"
-                    labelPlacement="start"
                     onClick={() => dispatch(setNeedsRepeat(true))}
                 />
                 <FormControlLabel
                     control={<Radio color="secondary" checked={needsRepeat === false} />}
                     label="No"
-                    labelPlacement="start"
                     onClick={() => dispatch(setNeedsRepeat(false))}
                 />
             </RadioGroup>

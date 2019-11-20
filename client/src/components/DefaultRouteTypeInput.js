@@ -20,14 +20,12 @@ const DefaultRouteTypeInput = () => {
                     value="calltype"
                     control={<Radio color="secondary" checked={defaultRouteTo === "calltype"} />}
                     label="Calltype"
-                    labelPlacement="start"
                     onClick={() => dispatch(setDefaultRouteTo("calltype"))}
                 />
                 <FormControlLabel
                     value="menu"
                     control={<Radio color="secondary" checked={defaultRouteTo === "menu"} />}
                     label="Menu"
-                    labelPlacement="start"
                     onClick={() => dispatch(setDefaultRouteTo("menu"))}
                 />
             </RadioGroup>

@@ -42,7 +42,7 @@ const ButtonMenu = (props) => {
                     onClick={createMenu}>
                 Create Menu
             </Button>
-            <Button variant="contained" style={{color: "white", backgroundColor: "#40739e"}} size="large"
+            <Button id="nextButton" variant="contained" style={{color: "white", backgroundColor: "#40739e"}} size="large"
                     onClick={createGrammar}>
                 Create Grammar
             </Button>

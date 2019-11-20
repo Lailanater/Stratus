@@ -70,38 +70,40 @@ const AddProjectPage = (props) => {
     }
 
     return (
-        <Paper>
-            <Typography variant="h6">
-                Project Path
-            </Typography>
-            <TextField
-                id="project-path-input"
-                margin="normal"
-                variant="outlined"
-                onChange={setDefaultProjectName}
-            />
+        <div className="container">
+            <Paper className="container">
+                <Typography variant="h6">
+                    Project Path
+                </Typography>
+                <TextField
+                    id="project-path-input"
+                    margin="normal"
+                    variant="outlined"
+                    onChange={setDefaultProjectName}
+                />
 
-            <Button variant="contained" onClick={selectFolder}>
-                Select directory...
-            </Button>
+                <Button id="selectDirectoryButton" variant="contained" onClick={selectFolder}>
+                    Select directory...
+                </Button>
 
-            <br />
+                <br />
 
-            <Typography variant="h6">
-                Project Name
-            </Typography>
-            <TextField
-                id="project-name-input"
-                margin="normal"
-                variant="outlined"
-            />
+                <Typography variant="h6">
+                    Project Name
+                </Typography>
+                <TextField
+                    id="project-name-input"
+                    margin="normal"
+                    variant="outlined"
+                />
+            </Paper>
 
             <br />
 
             <Button variant="contained" color="secondary" onClick={handleOnClick}>
                 Add Project
             </Button>
-        </Paper>
+        </div>
     );
 };
 
