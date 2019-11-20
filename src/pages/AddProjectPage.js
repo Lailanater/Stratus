@@ -8,6 +8,7 @@ import { Link, Redirect } from "react-router-dom";
 import { withSnackbar } from "notistack";
 
 const {remote} = window.require("electron");
+const fs = remote.require("fs");
 
 const AddProjectPage = (props) => {
 
@@ -26,6 +27,10 @@ const AddProjectPage = (props) => {
         return path.substr(backslashIndex + 1, path.length);
     }
 
+    function isValidPath(path) {
+        return fs.existsSync(path);
+    }
+
     function handleOnClick() {
         const projectName = document.querySelector("#project-name-input").value;
         const projectPath = document.querySelector("#project-path-input").value;
@@ -33,8 +38,12 @@ const AddProjectPage = (props) => {
         if (projectName === "" || projectPath === "") {
             props.enqueueSnackbar("Please update both fields first", {variant: "error", autoHideDuration: 2000});
         } else {
-            dispatch(addProject(projectName, projectPath));
-            setCanRedirect(true);
+            if (isValidPath(projectPath)) {
+                dispatch(addProject(projectName, projectPath));
+                setCanRedirect(true);
+            } else {
+                props.enqueueSnackbar("The path you have entered is not valid", {variant: "error", autoHideDuration: 2000});
+            }
         }
 
     }
