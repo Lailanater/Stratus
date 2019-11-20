@@ -5,6 +5,7 @@
   "main": "./public/electron.js",
   "author": "Chris Lail <chrislail56@gmail.com>",
   "description": "An application that generates VXML Code.",
+  "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",

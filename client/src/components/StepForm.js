@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 const StepForm = (props) => {
     const [activeStep, setActiveStep] = useState(0);
@@ -46,7 +45,7 @@ const StepForm = (props) => {
     }
 
     if (canRedirect) {
-        return <Redirect to="/" />;
+        return <Redirect to="/"/>;
     }
 
     return (
@@ -63,7 +62,7 @@ const StepForm = (props) => {
                     Previous
                 </Button>
                 {nextStepButton}
-                <br />
+                <br/>
                 <div id="stepContents">
                     {currentStepComponent}
                 </div>

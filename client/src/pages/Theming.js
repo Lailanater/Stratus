@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { useSelector } from "react-redux";
 
 import Header from "../components/Header";
-import { BrowserRouter, Route } from "react-router-dom";
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import HomePage from "./HomePage";
 import SettingsPage from "./SettingsPage";
 import AddProjectPage from "./AddProjectPage";
@@ -33,6 +33,7 @@ const Theming = (props) => {
                 <CssBaseline />
                 <BrowserRouter>
                     <Header />
+                    <Redirect to="/" />
                     <Route exact path="/" component={HomePage} />
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/addProject" component={AddProjectPage} />
