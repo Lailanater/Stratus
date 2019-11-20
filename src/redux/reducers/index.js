@@ -35,10 +35,6 @@ function rootReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 projects: state.projects.concat(action.newProject)
             });
-        case SET_NUM_OF_OPTIONS:
-            return Object.assign({}, state, {
-                numOfOptions: action.numOfOptions
-            });
         case SET_MENU_NAME:
             return Object.assign({}, state, {
                 menuName: action.menuName

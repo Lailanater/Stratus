@@ -39,13 +39,6 @@ export function addProject(projectName, projectPath) {
     };
 }
 
-export function setNumOfOptions(numOfOptions) {
-    return {
-        type: SET_NUM_OF_OPTIONS,
-        numOfOptions
-    };
-}
-
 export function setMenuName(menuName) {
     return {
         type: SET_MENU_NAME,

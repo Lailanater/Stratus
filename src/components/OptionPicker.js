@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { useDispatch, useSelector } from "react-redux";
-import { setNumOfOptions } from "../redux/actions/actionCreators";
+import { setDtmfOptions, setNumOfOptions } from "../redux/actions/actionCreators";
 
 const OptionPicker = (props) => {
 
-    const numOfOptions = useSelector(state => state.numOfOptions);
+    const dtmfOptions = useSelector(state => state.dtmfOptions);
+    const [numOfOptions, setNumOfOptions] = useState(dtmfOptions.length);
     const dispatch = useDispatch();
 
     const marks = setMarks();
@@ -22,9 +23,23 @@ const OptionPicker = (props) => {
         return marks;
     }
 
+    function setDefaultsForDtmfOptions(newSize) {
+        let newDtmfOptions = dtmfOptions;
+        if (dtmfOptions.length < newSize) {
+            for (let i = dtmfOptions.length; i < newSize; i++) {
+                newDtmfOptions[i] = "calltype";
+            }
+        }
+        else if (dtmfOptions.length > newSize) {
+            newDtmfOptions.length = newSize;
+        }
+        setNumOfOptions(newDtmfOptions.length);
+        return newDtmfOptions;
+    }
+
     function handleChange(event, value) {
-        if (value !== numOfOptions) {
-            dispatch(setNumOfOptions(value));
+        if (value !== dtmfOptions.length) {
+            dispatch(setDtmfOptions(setDefaultsForDtmfOptions(value)));
         }
     }
 

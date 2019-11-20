@@ -16,7 +16,7 @@ const SideMenu = (props) => {
         <Drawer open={isAppMenuDisplayed} onClose={() => dispatch(toggleAppMenu())}>
             <List>
                 <StyledLink to="/addProject">
-                    <MenuButton icon={<AddIcon color="primary" />} text="Add New Project" />
+                    <MenuButton icon={<AddIcon color="primary" />} text="Add Project" />
                 </StyledLink>
 
                 <StyledLink to="/settings">

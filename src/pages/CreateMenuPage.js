@@ -4,7 +4,7 @@ import StepForm from "../components/StepForm";
 import OptionPicker from "../components/OptionPicker";
 import MenuNameInput from "../components/MenuNameInput";
 import NeedsRepeatOptionInput from "../components/NeedsRepeatOptionInput";
-import OptionTypeInput from "../components/OptionTypeInput";
+import OptionTypeView from "../components/OptionTypeView";
 import DefaultRouteTypeInput from "../components/DefaultRouteTypeInput";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,14 +12,12 @@ import {
     setDtmfOptions,
     setMenuName,
     setNeedsRepeat,
-    setNumOfOptions
 } from "../redux/actions/actionCreators";
 
 const CreateMenuPage = (props) => {
 
     const [isFirstRender, setIsFirstRender] = useState(true);
     const menuName = useSelector(state => state.menuName);
-    const numOfOptions = useSelector(state => state.numOfOptions);
     const needsRepeat = useSelector(state => state.needsRepeat);
     const dtmfOptions = useSelector(state => state.dtmfOptions);
     const defaultRouteTo = useSelector(state => state.defaultRouteTo);
@@ -29,9 +27,6 @@ const CreateMenuPage = (props) => {
         if (isFirstRender) {
             if (menuName !== "") {
                 dispatch(setMenuName(""));
-            }
-            if (numOfOptions !== 0) {
-                dispatch(setNumOfOptions(0));
             }
             if (needsRepeat === true) {
                 dispatch(setNeedsRepeat(false));
@@ -44,14 +39,14 @@ const CreateMenuPage = (props) => {
             }
             setIsFirstRender(false);
         }
-    }, [menuName, numOfOptions, needsRepeat, dtmfOptions, defaultRouteTo, dispatch, isFirstRender]);
+    }, [menuName, needsRepeat, dtmfOptions, defaultRouteTo, dispatch, isFirstRender]);
 
 
     let steps = [];
     addStep("Enter The Name of The Menu to Make Grammar(s) for", <MenuNameInput />);
     addStep("Select DTMF Options", <OptionPicker maxOptions={9} />);
     addStep("Repeat?", <NeedsRepeatOptionInput />);
-    addStep("Set DTMF Option Types", <OptionTypeInput />);
+    addStep("Set DTMF Option Types", <OptionTypeView />);
     addStep("Set Default Route Option Type", <DefaultRouteTypeInput />);
 
     function addStep(label, component) {

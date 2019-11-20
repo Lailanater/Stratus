@@ -4,10 +4,11 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const StepForm = (props) => {
     const [activeStep, setActiveStep] = useState(0);
+    const [canRedirect, setCanRedirect] = useState(false);
 
     const firstStep = 0;
     const lastStep = props.steps.length - 1;
@@ -25,16 +26,15 @@ const StepForm = (props) => {
 
     function sendFinishedForm() {
         props.onSubmit();
+        setCanRedirect(true);
     }
 
     function getNextStepButton() {
         if (activeStep === lastStep) {
             return (
-                <Link to="/">
-                    <Button variant="contained" color="primary" onClick={sendFinishedForm}>
-                        Finish
-                    </Button>
-                </Link>
+                <Button variant="contained" color="primary" onClick={sendFinishedForm}>
+                    Finish
+                </Button>
             );
         } else {
             return (
@@ -43,6 +43,10 @@ const StepForm = (props) => {
                 </Button>
             );
         }
+    }
+
+    if (canRedirect) {
+        return <Redirect to="/" />
     }
 
     return (

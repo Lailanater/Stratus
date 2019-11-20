@@ -7,7 +7,6 @@ export const initialState = {
     currentProject: "",
     projects: [],
     menuName: "",
-    numOfOptions: 0,
     needsRepeat: false,
     dtmfOptions: [],
     defaultRouteTo: "menu"
