@@ -17,14 +17,21 @@ const AddProjectPage = (props) => {
 
     function setDefaultProjectName() {
         console.log(document.querySelector("#project-name-input").value);
-        document.querySelector("#project-name-input").value = getTextAfterLastBackSlash();
+        document.querySelector("#project-name-input").value = getTextAfterLastSlash();
     }
 
-    function getTextAfterLastBackSlash() {
+    function getTextAfterLastSlash() {
         let path = document.querySelector("#project-path-input").value;
-        let backslashIndex = path.lastIndexOf("\\");
+        let slashIndex = 0;
 
-        return path.substr(backslashIndex + 1, path.length);
+        if (path.indexOf("\\") !== -1) {
+            slashIndex = path.lastIndexOf("\\");
+        }
+        else if (path.indexOf("/") !== -1) {
+            slashIndex = path.lastIndexOf("/");
+        }
+
+        return path.substr(slashIndex + 1, path.length);
     }
 
     function isValidPath(path) {
@@ -60,7 +67,7 @@ const AddProjectPage = (props) => {
                 const selectedDirectory = result.filePaths[0];
 
                 document.querySelector("#project-path-input").value = selectedDirectory;
-                document.querySelector("#project-name-input").value = getTextAfterLastBackSlash();
+                document.querySelector("#project-name-input").value = getTextAfterLastSlash();
             }
         );
     }
