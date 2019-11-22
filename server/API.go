@@ -58,7 +58,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 		log.Fatal(err)
 	}
 
-	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles( wd + "\\server\\templates\\menuTemplate.govxml"))
+	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles( wd + "/server/templates/menuTemplate.govxml"))
 	data := MenuData {
 		MenuName: menuName,
 		DtmfOptions: dtmfOptions,

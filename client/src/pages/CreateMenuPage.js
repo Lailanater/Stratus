@@ -8,12 +8,14 @@ import OptionTypeView from "../components/OptionTypeView";
 import DefaultRouteTypeInput from "../components/DefaultRouteTypeInput";
 import { useDispatch, useSelector } from "react-redux";
 import { setDefaultRouteTo, setDtmfOptions, setMenuName, setNeedsRepeat, } from "../redux/actions/actionCreators";
+import API from "../routes/API";
 
 const CreateMenuPage = (props) => {
 
     const [isFirstRender, setIsFirstRender] = useState(true);
     const menuName = useSelector(state => state.menuName);
     const needsRepeat = useSelector(state => state.needsRepeat);
+    const projectPath = useSelector(state => state.currentProject.projectPath);
     const dtmfOptions = useSelector(state => state.dtmfOptions);
     const defaultRouteTo = useSelector(state => state.defaultRouteTo);
     const dispatch = useDispatch();
@@ -56,6 +58,7 @@ const CreateMenuPage = (props) => {
     }
 
     function createMenu() {
+        API.createMenu(menuName, defaultRouteTo, projectPath, dtmfOptions);
         props.enqueueSnackbar("Menu was successfully created!", {variant: "success", autoHideDuration: 2000});
     }
 

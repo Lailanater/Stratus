@@ -8,9 +8,15 @@ import FormControl from "@material-ui/core/FormControl";
 import { withSnackbar } from "notistack";
 import StepForm from "../components/StepForm";
 import OptionPicker from "../components/OptionPicker";
+import API from "../routes/API";
+import {useSelector} from "react-redux";
 
 const CreateGrammarPage = (props) => {
 
+    const menuName = useSelector(state => state.menuName);
+    const needsRepeat = useSelector(state => state.needsRepeat);
+    const projectPath = useSelector(state => state.currentProject.projectPath);
+    const dtmfOptions = useSelector(state => state.dtmfOptions);
     const [needsDTMF, setNeedsDTMF] = useState(false);
     const [needsVoice, setNeedsVoice] = useState(false);
 
@@ -45,6 +51,7 @@ const CreateGrammarPage = (props) => {
     addStep("Select Type of Grammar(s)", selectGrammarType);
 
     function createGrammar() {
+        API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions);
         props.enqueueSnackbar("Grammar was successfully created!", {variant: "success", autoHideDuration: 2000});
     }
 

@@ -1,7 +1,23 @@
 package main
 
-func main() {
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
-	//CreateMenu(menuName, defaultRouteTo, projectPath, dtmfOptions)
-	//CreateGrammar(menuName, mode, projectPath, needsRepeat, dtmfOptions)
+func createMenuHandler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("There was a request!")
+	test := r.Form.Get("menuName")
+	fmt.Println(test)
+}
+
+func main() {
+	http.HandleFunc("/api/createMenu", createMenuHandler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
