@@ -29,6 +29,8 @@
     "package": "./node_modules/.bin/electron-builder build -c.extraMetadata.main=build/electron.js"
   },
   "build": {
+    "appId": "com.electron-lail.stratus",
+    "productName": "Stratus",
     "files": [
       "build/**/*",
       "node_modules/**/*"
