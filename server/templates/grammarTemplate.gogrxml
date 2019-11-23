@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar version="1.0"
+         xml:lang="en-US"
+         mode="{{ .Mode }}"
+         xmlns="http://www.w3.org/2001/06/grammar"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.w3.org/2001/06/grammar http://www.w3.org/TR/speech-grammar/grammar.xsd"
+         root="root">
+
+    <!-- This file has been auto-generated. @author Chris Lail -->
+
+    <rule id="root" scope="public">
+        <one-of>
+            {{- if .NeedsRepeat }}
+            <item>#</item>
+            {{- end }}
+            {{- range $i, $v := .DtmfOptions}}
+            <item>{{inc $i}}</item>
+            {{- end}}
+        </one-of>
+    </rule>
+</grammar>
