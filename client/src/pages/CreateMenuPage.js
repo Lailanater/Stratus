@@ -15,7 +15,7 @@ const CreateMenuPage = (props) => {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const menuName = useSelector(state => state.menuName);
     const needsRepeat = useSelector(state => state.needsRepeat);
-    const projectPath = useSelector(state => state.currentProject.projectPath);
+    const projectPath = useSelector(state => state.currentProject.path);
     const dtmfOptions = useSelector(state => state.dtmfOptions);
     const defaultRouteTo = useSelector(state => state.defaultRouteTo);
     const dispatch = useDispatch();

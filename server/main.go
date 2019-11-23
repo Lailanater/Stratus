@@ -13,8 +13,19 @@ func createMenuHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("There was a request!")
-	test := r.Form.Get("menuName")
-	fmt.Println(test)
+	form := r.Form
+	fmt.Println("form", form.Encode())
+	menuName := form.Get("menuName")
+	defaultRouteTo := form.Get("defaultRouteTo")
+	dtmfOptions := form.Get("dtmfOptions[]")
+	projectPath := form.Get("projectPath")
+	test := form.Get("test")
+
+	fmt.Println("menuName:", menuName)
+	fmt.Println("defaultRouteTo:", defaultRouteTo)
+	fmt.Println("dtmfOptions:",dtmfOptions)
+	fmt.Println("projectPath:", projectPath)
+	fmt.Println("test:", test)
 }
 
 func main() {
