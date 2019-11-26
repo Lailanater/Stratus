@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"reflect"
 	"strconv"
 )
 
@@ -29,8 +30,13 @@ func createMenuHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Default Route To:\t", defaultRouteTo)
 	fmt.Println("Project Path:\t\t", projectPath)
 	for i, v := range dtmfOptions {
-		fmt.Println("Option " + strconv.Itoa(i + 1) + " Goes To:\t", v)
+		fmt.Printf("Option " + strconv.Itoa(i + 1) + " Goes To:\t", v)
 	}
+
+	fmt.Println("menuName type:", reflect.TypeOf(menuName).String())
+	fmt.Println("defaultRouteTo type:", reflect.TypeOf(defaultRouteTo).String())
+	fmt.Println("projectPath type:", reflect.TypeOf(projectPath).String())
+	fmt.Println("dtmfOptions type:", reflect.TypeOf(dtmfOptions).String())
 
 	status := CreateMenu(menuName, defaultRouteTo, projectPath, dtmfOptions)
 

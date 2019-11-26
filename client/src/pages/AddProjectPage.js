@@ -20,11 +20,16 @@ const AddProjectPage = (props) => {
         document.querySelector("#project-name-input").value = getTextAfterLastSlash();
     }
 
-    function getTextAfterLastSlash() {
-        let path = document.querySelector("#project-path-input").value;
-        if (path.indexOf("/") !== -1) {
+    function replaceBacklashesWithForwardSlashes(path) {
+        if (path.indexOf("/") === -1) {
             path = path.replace(/\\/g, "/");
         }
+        return path
+    }
+
+    function getTextAfterLastSlash() {
+        let path = document.querySelector("#project-path-input").value;
+        path = replaceBacklashesWithForwardSlashes(path);
 
         let slashIndex = path.lastIndexOf("/");
 
@@ -63,7 +68,7 @@ const AddProjectPage = (props) => {
         remote.dialog.showOpenDialog(options).then(result => {
                 const selectedDirectory = result.filePaths[0];
 
-                document.querySelector("#project-path-input").value = selectedDirectory;
+                document.querySelector("#project-path-input").value = replaceBacklashesWithForwardSlashes(selectedDirectory);
                 document.querySelector("#project-name-input").value = getTextAfterLastSlash();
             }
         );

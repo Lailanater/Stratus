@@ -55,7 +55,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 
 	wd, err := os.Getwd()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return false
 	}
 
@@ -66,10 +66,22 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 		DefaultRouteTo: defaultRouteTo,
 	}
 
+	permissions := os.FileMode(777)
+	err = os.MkdirAll(projectPath+"/WebContent/", permissions)
+	if err != nil {
+		log.Println("os.MkdirAll")
+		log.Println(err)
+		return false
+	}
 	f, err := os.Create(projectPath + "/WebContent/" + menuName + ".vxml")
+	if err != nil {
+		log.Println("os.Create")
+		log.Println(err)
+		return false
+	}
 	err = tmpl.Execute(f, data)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return false
 	}
 	return true
