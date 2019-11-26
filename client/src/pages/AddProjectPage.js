@@ -66,7 +66,10 @@ const AddProjectPage = (props) => {
         };
 
         remote.dialog.showOpenDialog(options).then(result => {
-                const selectedDirectory = result.filePaths[0];
+                let selectedDirectory = result.filePaths[0];
+                if (selectedDirectory === undefined) {
+                    selectedDirectory = ""
+                }
 
                 document.querySelector("#project-path-input").value = replaceBacklashesWithForwardSlashes(selectedDirectory);
                 document.querySelector("#project-name-input").value = getTextAfterLastSlash();

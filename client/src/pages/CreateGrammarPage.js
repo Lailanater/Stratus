@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -9,24 +8,21 @@ import { withSnackbar } from "notistack";
 import StepForm from "../components/StepForm";
 import OptionPicker from "../components/OptionPicker";
 import API from "../routes/API";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
+import MenuNameInput from "../components/MenuNameInput";
+import NeedsRepeatOptionInput from "../components/NeedsRepeatOptionInput";
 
 const CreateGrammarPage = (props) => {
 
     const menuName = useSelector(state => state.menuName);
     const needsRepeat = useSelector(state => state.needsRepeat);
-    const projectPath = useSelector(state => state.currentProject.projectPath);
+    const projectPath = useSelector(state => state.currentProject.path);
     const dtmfOptions = useSelector(state => state.dtmfOptions);
     const [needsDTMF, setNeedsDTMF] = useState(false);
     const [needsVoice, setNeedsVoice] = useState(false);
 
     const grammarName = (
-        <TextField
-            label="Menu Name"
-            helperText="Enter the name of the menu you are creating grammar(s) for"
-            margin="normal"
-            variant="outlined"
-        />
+        <MenuNameInput helperText="Enter the name of the menu you are creating grammar(s) for" />
     );
 
     const selectGrammarType = (
@@ -48,10 +44,16 @@ const CreateGrammarPage = (props) => {
     let steps = [];
     addStep("Enter The Name of The Menu to Make Grammar(s) for", grammarName);
     addStep("Select DTMF Options", <OptionPicker maxOptions={9} />);
+    addStep("Repeat?", <NeedsRepeatOptionInput />);
     addStep("Select Type of Grammar(s)", selectGrammarType);
 
     function createGrammar() {
-        API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions);
+        if (needsVoice) {
+            API.createGrammar(menuName, "voice", projectPath, needsRepeat, dtmfOptions);
+        }
+        if (needsDTMF) {
+            API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions);
+        }
         props.enqueueSnackbar("Grammar was successfully created!", {variant: "success", autoHideDuration: 2000});
     }
 
