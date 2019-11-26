@@ -46,7 +46,7 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 	_ = tmpl.Execute(f, data)
 }
 
-func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []string) {
+func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []string) bool {
 	funcMap := template.FuncMap{
 		"inc": func(i int) int {
 			return i+1
@@ -56,6 +56,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 	wd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
+		return false
 	}
 
 	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles( wd + "/server/templates/menuTemplate.govxml"))
@@ -66,5 +67,10 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 	}
 
 	f, err := os.Create(projectPath + "/WebContent/" + menuName + ".vxml")
-	_ = tmpl.Execute(f, data)
+	err = tmpl.Execute(f, data)
+	if err != nil {
+		log.Fatal(err)
+		return false
+	}
+	return true
 }
