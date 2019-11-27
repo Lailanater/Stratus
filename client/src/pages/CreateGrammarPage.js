@@ -148,8 +148,15 @@ const CreateGrammarPage = (props) => {
     function yesOnClick() {
         setShouldOverwrite(true);
         setShowDialog(false);
+    }
+
+    function noOnClick() {
+        setShouldOverwrite(false);
+        setShowDialog(false);
+    }
+
     return (
-        <StepForm steps={steps} onSubmit={createGrammar} />
+        <div>
             <FileExistsDialog fileName={menuName} open={showDialog} yesOnClick={yesOnClick} noOnClick={noOnClick} />
             <StepForm steps={steps} onSubmit={createGrammar} canRedirect={canRedirect} />
         </div>
