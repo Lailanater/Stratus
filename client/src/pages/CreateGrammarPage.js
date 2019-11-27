@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -8,18 +8,36 @@ import { withSnackbar } from "notistack";
 import StepForm from "../components/StepForm";
 import OptionPicker from "../components/OptionPicker";
 import API from "../routes/API";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MenuNameInput from "../components/MenuNameInput";
 import NeedsRepeatOptionInput from "../components/NeedsRepeatOptionInput";
+import { setDtmfOptions, setMenuName, setNeedsRepeat } from "../redux/actions/actionCreators";
 
 const CreateGrammarPage = (props) => {
 
+    const [isFirstRender, setIsFirstRender] = useState(true);
     const menuName = useSelector(state => state.menuName);
     const needsRepeat = useSelector(state => state.needsRepeat);
     const projectPath = useSelector(state => state.currentProject.path);
     const dtmfOptions = useSelector(state => state.dtmfOptions);
+    const dispatch = useDispatch();
     const [needsDTMF, setNeedsDTMF] = useState(false);
     const [needsVoice, setNeedsVoice] = useState(false);
+
+    useEffect(() => {
+        if (isFirstRender) {
+            if (menuName !== "") {
+                dispatch(setMenuName(""));
+            }
+            if (needsRepeat === true) {
+                dispatch(setNeedsRepeat(false));
+            }
+            if (dtmfOptions !== []) {
+                dispatch(setDtmfOptions([]));
+            }
+            setIsFirstRender(false);
+        }
+    }, [menuName, needsRepeat, dtmfOptions, dispatch, isFirstRender]);
 
     const grammarName = (
         <MenuNameInput helperText="Enter the name of the menu you are creating grammar(s) for" />
