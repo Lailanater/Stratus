@@ -44,3 +44,20 @@ code {
 #project-name-input {
     width: 350px;
 }
+
+#fileExistsDialogContainer {
+    padding: 20px;
+}
+
+#fileExistsDialogButtonContainer {
+    text-align: center;
+}
+
+#fileExistsDialogYesButton {
+    padding: 10px;
+}
+
+#fileExistsDialogNoButton {
+    margin-left: 20px;
+    padding: 10px;
+}
