@@ -58,8 +58,42 @@ const CreateMenuPage = (props) => {
     }
 
     function createMenu() {
-        API.createMenu(menuName, defaultRouteTo, projectPath, dtmfOptions);
-        props.enqueueSnackbar("Menu was successfully created!", {variant: "success", autoHideDuration: 2000});
+        API.createMenu(menuName, defaultRouteTo, projectPath, dtmfOptions)
+            .then((menuRes) => {
+                if (menuRes.data) {
+                    API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions)
+                        .then((grammarRes) => {
+                            if (grammarRes.data) {
+                                props.enqueueSnackbar("Menu & grammar were successfully created!", {
+                                    variant: "success",
+                                    autoHideDuration: 2000
+                                });
+                            } else {
+                                props.enqueueSnackbar("There was a problem creating the grammar.", {
+                                    variant: "warning",
+                                    autoHideDuration: 2000
+                                });
+                            }
+                        }).catch((err) => {
+                        props.enqueueSnackbar("An error occurred when creating the grammar.", {
+                            variant: "error",
+                            autoHideDuration: 2000
+                        });
+                        console.log(err);
+                    });
+                } else {
+                    props.enqueueSnackbar("There was a problem creating the menu.", {
+                        variant: "warning",
+                        autoHideDuration: 2000
+                    });
+                }
+            }).catch((err) => {
+            props.enqueueSnackbar("An error occurred when creating the menu.", {
+                variant: "error",
+                autoHideDuration: 2000
+            });
+            console.log(err);
+        });
     }
 
     return (

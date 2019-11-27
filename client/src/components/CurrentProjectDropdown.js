@@ -14,7 +14,7 @@ const CurrentProjectDropdown = (props) => {
     }
 
     return (
-        <Paper className="container" elevation="5">
+        <Paper className="container" elevation={5}>
             <InputLabel>Current Project</InputLabel>
             <Select value={currentProject} onChange={handleOnChange}>
                 {projects.map(project =>

@@ -49,12 +49,49 @@ const CreateGrammarPage = (props) => {
 
     function createGrammar() {
         if (needsVoice) {
-            API.createGrammar(menuName, "voice", projectPath, needsRepeat, dtmfOptions);
+            API.createGrammar(menuName, "voice", projectPath, needsRepeat, dtmfOptions)
+                .then((grammarRes) => {
+                    if (grammarRes.data) {
+                        props.enqueueSnackbar("Voice grammar was successfully created!", {
+                            variant: "success",
+                            autoHideDuration: 2000
+                        });
+                    } else {
+                        props.enqueueSnackbar("There was a problem creating the voice grammar.", {
+                            variant: "warning",
+                            autoHideDuration: 2000
+                        });
+                    }
+                }).catch((err) => {
+                props.enqueueSnackbar("An error occurred when creating the voice grammar.", {
+                    variant: "error",
+                    autoHideDuration: 2000
+                });
+                console.log(err);
+            });
         }
         if (needsDTMF) {
-            API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions);
+            API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions)
+                .then((grammarRes) => {
+                    if (grammarRes.data) {
+                        props.enqueueSnackbar("DTMF grammar was successfully created!", {
+                            variant: "success",
+                            autoHideDuration: 2000
+                        });
+                    } else {
+                        props.enqueueSnackbar("There was a problem creating the dtmf grammar.", {
+                            variant: "warning",
+                            autoHideDuration: 2000
+                        });
+                    }
+                }).catch((err) => {
+                props.enqueueSnackbar("An error occurred when creating the dtmf grammar.", {
+                    variant: "error",
+                    autoHideDuration: 2000
+                });
+                console.log(err);
+            });
         }
-        props.enqueueSnackbar("Grammar was successfully created!", {variant: "success", autoHideDuration: 2000});
     }
 
     function handleChange(event) {

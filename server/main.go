@@ -8,6 +8,8 @@ import (
 )
 
 func createMenuHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	err := r.ParseForm()
 	if err != nil {
 		panic(err)
@@ -39,9 +41,14 @@ func createMenuHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		fmt.Println("Request FAILED!")
 	}
+
+	reply := strconv.FormatBool(status)
+	_, _ = w.Write([]byte(reply))
 }
 
 func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	err := r.ParseForm()
 	if err != nil {
 		panic(err)
@@ -75,6 +82,9 @@ func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		fmt.Println("Request FAILED!")
 	}
+
+	reply := strconv.FormatBool(status)
+	_, _ = w.Write([]byte(reply))
 }
 
 func main() {
@@ -82,4 +92,8 @@ func main() {
 	http.HandleFunc("/api/createMenu", createMenuHandler)
 	http.HandleFunc("/api/createGrammar", createGrammarHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 }
