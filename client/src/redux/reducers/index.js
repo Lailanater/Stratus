@@ -8,9 +8,8 @@ import {
     TOGGLE_APP_MENU,
     TOGGLE_THEME
 } from "../constants/actionTypes";
-import { initialState } from "../store";
 
-function rootReducer(state = initialState, action) {
+function rootReducer(state, action) {
     switch (action.type) {
         case TOGGLE_APP_MENU:
             return Object.assign({}, state, {

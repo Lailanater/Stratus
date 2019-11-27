@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 import rootReducer from "./reducers";
 
-export const initialState = {
+const initialState = {
     isAppMenuDisplayed: false,
     theme: "dark",
     currentProject: "",
@@ -12,4 +12,4 @@ export const initialState = {
     defaultRouteTo: "menu"
 };
 
-export default createStore(rootReducer);
+export default createStore(rootReducer, initialState);
