@@ -20,7 +20,7 @@ type MenuData struct {
 	DefaultRouteTo string
 }
 
-func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOptions []string) bool {
+func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOptions []string, shouldOverwrite bool) (bool, bool) {
 	funcMap := template.FuncMap{
 		"inc": func(i int) int {
 			return i + 1
@@ -31,7 +31,7 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 	if err != nil {
 		log.Println("os.Getwd")
 		log.Println(err)
-		return false
+		return false, false
 	}
 
 	var tmpl *template.Template
@@ -42,7 +42,6 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(wd + "\\server\\templates\\dtmfGrammarTemplate.gogrxml"))
 		mode = "Voice"
 	}
-
 
 	data := GrammarData{
 		MenuName:    menuName,
@@ -57,27 +56,23 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 	if err != nil {
 		log.Println("os.MkdirAll")
 		log.Println(err)
-		return false
+		return false, false
 	}
 
-	f, err := os.Create(projectPath + "/WebContent/grammar/english/" + menuName + "_" + mode + ".grxml")
-	if err != nil {
-		log.Println("os.Create")
-		log.Println(err)
-		return false
+	pathToFile := projectPath + "/WebContent/grammar/english/" + menuName + "_" + mode + ".grxml"
+	fileExists := doesFileExist(pathToFile)
+	if fileExists {
+		if shouldOverwrite {
+			return createFileFromTemplate(pathToFile, tmpl, data, fileExists)
+		} else {
+			return false, fileExists
+		}
+	} else {
+		return createFileFromTemplate(pathToFile, tmpl, data, fileExists)
 	}
-
-	err = tmpl.Execute(f, data)
-	defer f.Close()
-	if err != nil {
-		log.Println("tmpl.Execute")
-		log.Println(err)
-		return false
-	}
-	return true
 }
 
-func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []string) bool {
+func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []string, shouldOverwrite bool) (bool, bool) {
 	funcMap := template.FuncMap{
 		"inc": func(i int) int {
 			return i + 1
@@ -88,7 +83,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 	if err != nil {
 		log.Println("os.Getwd")
 		log.Println(err)
-		return false
+		return false, false
 	}
 
 	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles(wd + "/server/templates/menuTemplate.govxml"))
@@ -103,23 +98,43 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 	if err != nil {
 		log.Println("os.MkdirAll")
 		log.Println(err)
-		return false
+		return false, false
 	}
 
-	f, err := os.Create(projectPath + "/WebContent/" + menuName + ".vxml")
+	pathToFile := projectPath + "/WebContent/" + menuName + ".vxml"
+	fileExists := doesFileExist(pathToFile)
+	if fileExists {
+		if shouldOverwrite {
+			return createFileFromTemplate(pathToFile, tmpl, data, fileExists)
+		} else {
+			return false, fileExists
+		}
+	} else {
+		return createFileFromTemplate(pathToFile, tmpl, data, fileExists)
+	}
+}
+
+func createFileFromTemplate(pathToFile string, tmpl *template.Template, data interface{}, fileExists bool) (bool, bool) {
+	f, err := os.Create(pathToFile)
 	if err != nil {
 		log.Println("os.Create")
 		log.Println(err)
-		return false
+		return false, fileExists
 	}
-
 	err = tmpl.Execute(f, data)
 	defer f.Close()
 	if err != nil {
 		log.Println("tmpl.Execute")
 		log.Println(err)
+		return false, fileExists
+	}
+	return true, fileExists
+}
+
+func doesFileExist(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
 		return false
 	}
-
-	return true
+	return !info.IsDir()
 }

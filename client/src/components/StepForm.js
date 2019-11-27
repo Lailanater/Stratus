@@ -7,7 +7,6 @@ import {Redirect} from "react-router-dom";
 
 const StepForm = (props) => {
     const [activeStep, setActiveStep] = useState(0);
-    const [canRedirect, setCanRedirect] = useState(false);
 
     const firstStep = 0;
     const lastStep = props.steps.length - 1;
@@ -25,7 +24,6 @@ const StepForm = (props) => {
 
     function sendFinishedForm() {
         props.onSubmit();
-        setCanRedirect(true);
     }
 
     function getNextStepButton() {
@@ -44,7 +42,7 @@ const StepForm = (props) => {
         }
     }
 
-    if (canRedirect) {
+    if (props.canRedirect) {
         return <Redirect to="/"/>;
     }
 
