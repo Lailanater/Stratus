@@ -34,7 +34,16 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 		return false
 	}
 
-	tmpl := template.Must(template.New("grammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(wd + "\\server\\templates\\grammarTemplate.gogrxml"))
+	var tmpl *template.Template
+	if mode == "dtmf" {
+		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(wd + "\\server\\templates\\dtmfGrammarTemplate.gogrxml"))
+		mode = "DTMF"
+	} else if mode == "voice" {
+		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(wd + "\\server\\templates\\dtmfGrammarTemplate.gogrxml"))
+		mode = "Voice"
+	}
+
+
 	data := GrammarData{
 		MenuName:    menuName,
 		Mode:        mode,
@@ -49,12 +58,6 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 		log.Println("os.MkdirAll")
 		log.Println(err)
 		return false
-	}
-
-	if mode == "dtmf" {
-		mode = "DTMF"
-	} else if mode == "voice" {
-		mode = "Voice"
 	}
 
 	f, err := os.Create(projectPath + "/WebContent/grammar/english/" + menuName + "_" + mode + ".grxml")
