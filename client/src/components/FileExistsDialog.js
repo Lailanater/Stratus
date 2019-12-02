@@ -8,7 +8,7 @@ const FileExistsDialog = (props) => {
             <div id="fileExistsDialogContainer">
                 <DialogTitle id="fileExistsDialogTitle">{props.fileName} already exists.</DialogTitle>
                 <DialogContentText>Are you sure you want to overwrite it?</DialogContentText>
-                <div id="fileExistsDialogButtonContainer">
+                <div className="centerText">
                     <Button id="fileExistsDialogYesButton" style={{backgroundColor: "#4caf50"}}
                             onClick={props.yesOnClick}>Yes</Button>
                     <Button id="fileExistsDialogNoButton" style={{backgroundColor: "#f44336"}}

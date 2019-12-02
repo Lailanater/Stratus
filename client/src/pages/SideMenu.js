@@ -5,7 +5,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { toggleAppMenu } from "../redux/actions/actionCreators";
 import { useDispatch, useSelector } from "react-redux";
 import StyledLink from "../components/StyledLink";
-import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 
 const SideMenu = (props) => {
 
@@ -15,8 +15,8 @@ const SideMenu = (props) => {
     return (
         <Drawer open={isAppMenuDisplayed} onClose={() => dispatch(toggleAppMenu())}>
             <List>
-                <StyledLink to="/addProject">
-                    <MenuButton icon={<AddIcon color="primary" />} text="Add Project" />
+                <StyledLink to="/editProjects">
+                    <MenuButton icon={<EditIcon color="primary" />} text="Edit Projects" />
                 </StyledLink>
 
                 <StyledLink to="/settings">

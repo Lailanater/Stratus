@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Paper, Typography } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProject } from "../redux/actions/actionCreators";
 import { Redirect } from "react-router-dom";
 import { withSnackbar } from "notistack";
+import { objectsAreEqual } from "../utils/helpers";
 
 const {remote} = window.require("electron");
 const fs = remote.require("fs");
@@ -13,6 +14,7 @@ const fs = remote.require("fs");
 const AddProjectPage = (props) => {
 
     const [canRedirect, setCanRedirect] = useState(false);
+    const projects = useSelector(state => state.projects);
     const dispatch = useDispatch();
 
     function setDefaultProjectName() {
@@ -24,7 +26,7 @@ const AddProjectPage = (props) => {
         if (path.indexOf("/") === -1) {
             path = path.replace(/\\/g, "/");
         }
-        return path
+        return path;
     }
 
     function getTextAfterLastSlash() {
@@ -40,6 +42,21 @@ const AddProjectPage = (props) => {
         return fs.existsSync(path);
     }
 
+    function projectAlreadyExists(projectName, projectPath) {
+        const projectToAdd = {
+            name: projectName,
+            path: projectPath
+        };
+
+        for (let i = 0; i < projects.length; i++) {
+            let project = projects[i];
+            if (objectsAreEqual(project, projectToAdd)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function handleOnClick() {
         const projectName = document.querySelector("#project-name-input").value;
         const projectPath = document.querySelector("#project-path-input").value;
@@ -48,8 +65,15 @@ const AddProjectPage = (props) => {
             props.enqueueSnackbar("Please update both fields first", {variant: "error", autoHideDuration: 2000});
         } else {
             if (isValidPath(projectPath)) {
-                dispatch(addProject(projectName, projectPath));
-                setCanRedirect(true);
+                if (!projectAlreadyExists(projectName, projectPath)) {
+                    dispatch(addProject(projectName, projectPath));
+                    setCanRedirect(true);
+                } else {
+                    props.enqueueSnackbar("The project you entered already exists", {
+                        variant: "error",
+                        autoHideDuration: 2000
+                    });
+                }
             } else {
                 props.enqueueSnackbar("The path you have entered is not valid", {
                     variant: "error",
@@ -68,7 +92,7 @@ const AddProjectPage = (props) => {
         remote.dialog.showOpenDialog(options).then(result => {
                 let selectedDirectory = result.filePaths[0];
                 if (selectedDirectory === undefined) {
-                    selectedDirectory = ""
+                    selectedDirectory = "";
                 }
 
                 document.querySelector("#project-path-input").value = replaceBacklashesWithForwardSlashes(selectedDirectory);
@@ -78,7 +102,7 @@ const AddProjectPage = (props) => {
     }
 
     if (canRedirect) {
-        return <Redirect to="/" />;
+        return <Redirect to="/editProjects" />;
     }
 
     return (

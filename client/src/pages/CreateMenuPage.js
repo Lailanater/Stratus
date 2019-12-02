@@ -109,6 +109,10 @@ const CreateMenuPage = (props) => {
     function yesOnClick() {
         setShouldOverwrite(true);
         setShowDialog(false);
+        props.enqueueSnackbar("To continue with overwriting the menu click Finish again.", {
+            variant: "info",
+            autoHideDuration: 3000
+        });
     }
 
     function noOnClick() {
