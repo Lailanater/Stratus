@@ -12,7 +12,7 @@ const ProjectList = () => {
         contents = <Typography variant="h4">You have no projects yet. Try adding one!</Typography>;
     } else {
         projects.map(project => {
-            contents.push(<ProjectListItem key={project} project={project} />)
+            return contents.push(<ProjectListItem key={project.name} project={project} />)
         })
     }
 
