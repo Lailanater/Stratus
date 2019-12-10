@@ -69,6 +69,17 @@
 			{{- end}}
 			{{- end}}
 			{{- if .DtmfOptions }}
+			{{- if .NeedsRepeat }}
+			<elseif cond="option == '#'" />
+				<script>repeatLimitReached = isRepeatLimitReached();</script>
+				<log expr="applicationName + ': ' + currentPage + ': REPEAT: ' + repeatCounter + ': repeatLimitReached: ' + repeatLimitReached" />
+				<if cond="repeatLimitReached">
+					<log expr="applicationName + ': ' + currentPage + ': Repeat limit has been reached throwing state.repeat.limit'" />
+					<throw event="state.repeat.limit" />
+					<else />
+					<goto next="#{{ .MenuName }}PromptForm" />
+				</if>
+			{{- end}}
 			</if>
 			{{- end }}
 			<goto next="#NextPageForm" />
