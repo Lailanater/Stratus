@@ -1,5 +1,5 @@
 import {
-    ADD_PROJECT,
+    ADD_PROJECT, REMOVE_PROJECT,
     SET_CURRENT_PROJECT,
     SET_DEFAULT_ROUTE_TO,
     SET_DTMF_OPTIONS,
@@ -8,9 +8,9 @@ import {
     TOGGLE_APP_MENU,
     TOGGLE_THEME
 } from "../constants/actionTypes";
-import { initialState } from "../store";
+import { objectsAreEqual } from "../../utils/helpers";
 
-function rootReducer(state = initialState, action) {
+function rootReducer(state, action) {
     switch (action.type) {
         case TOGGLE_APP_MENU:
             return Object.assign({}, state, {
@@ -50,6 +50,12 @@ function rootReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 defaultRouteTo: action.defaultRouteTo
             });
+        case REMOVE_PROJECT:
+            const filteredProjects = state.projects.filter((project) => {
+                return !objectsAreEqual(project, action.projectToRemove)
+            });
+
+            return state = {...state, projects: filteredProjects};
         default:
             return state;
     }

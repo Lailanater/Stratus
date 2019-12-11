@@ -26,24 +26,26 @@ func createMenuHandler(w http.ResponseWriter, r *http.Request) {
 	menuName := r.PostFormValue("menuName")
 	defaultRouteTo := r.PostFormValue("defaultRouteTo")
 	projectPath := r.PostFormValue("projectPath")
+	shouldOverwriteString := r.PostFormValue("shouldOverwrite")
+	shouldOverwrite, _ := strconv.ParseBool(shouldOverwriteString)
 
 	fmt.Println("Menu Name:\t\t\t", menuName)
 	fmt.Println("Default Route To:\t", defaultRouteTo)
 	fmt.Println("Project Path:\t\t", projectPath)
+	fmt.Println("Should Overwrite:\t", shouldOverwrite)
 	for i, v := range dtmfOptions {
 		fmt.Println("Option "+strconv.Itoa(i+1)+" Goes To:\t", v)
 	}
 
-	status := CreateMenu(menuName, defaultRouteTo, projectPath, dtmfOptions)
+	fileCreated, fileExists := CreateMenu(menuName, defaultRouteTo, projectPath, dtmfOptions, shouldOverwrite)
 
-	if status {
-		fmt.Println("Request successfully completed!")
+	if fileCreated {
+		fmt.Println("Menu was created!")
 	} else {
-		fmt.Println("Request FAILED!")
+		fmt.Println("Menu was NOT created.")
 	}
 
-	reply := strconv.FormatBool(status)
-	_, _ = w.Write([]byte(reply))
+	SendJsonReply(w, fileCreated, fileExists, shouldOverwrite)
 }
 
 func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
@@ -66,6 +68,9 @@ func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
 	mode := r.PostFormValue("mode")
 	projectPath := r.PostFormValue("projectPath")
 	needsRepeat, _ := strconv.ParseBool(r.PostFormValue("needsRepeat"))
+	shouldOverwriteString := r.PostFormValue("shouldOverwrite")
+	shouldOverwrite, _ := strconv.ParseBool(shouldOverwriteString)
+	fmt.Println("Should Overwrite:\t", shouldOverwrite)
 
 	fmt.Println("Menu Name:\t\t\t", menuName)
 	fmt.Println("Mode:\t\t\t\t", mode)
@@ -75,16 +80,15 @@ func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Option "+strconv.Itoa(i+1)+" Goes To:\t", v)
 	}
 
-	status := CreateGrammar(menuName, mode, projectPath, needsRepeat, dtmfOptions)
+	fileCreated, fileExists := CreateGrammar(menuName, mode, projectPath, needsRepeat, dtmfOptions, shouldOverwrite)
 
-	if status {
+	if fileCreated {
 		fmt.Println("Request successfully completed!")
 	} else {
 		fmt.Println("Request FAILED!")
 	}
 
-	reply := strconv.FormatBool(status)
-	_, _ = w.Write([]byte(reply))
+	SendJsonReply(w, fileCreated, fileExists, shouldOverwrite)
 }
 
 func main() {

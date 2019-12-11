@@ -1,5 +1,5 @@
 import {
-    ADD_PROJECT,
+    ADD_PROJECT, REMOVE_PROJECT,
     SET_CURRENT_PROJECT,
     SET_DEFAULT_ROUTE_TO,
     SET_DTMF_OPTIONS,
@@ -64,4 +64,11 @@ export function setDefaultRouteTo(defaultRouteTo) {
         type: SET_DEFAULT_ROUTE_TO,
         defaultRouteTo
     };
+}
+
+export function removeProject(projectToRemove) {
+    return {
+        type: REMOVE_PROJECT,
+        projectToRemove
+    }
 }

@@ -12,10 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import MenuNameInput from "../components/MenuNameInput";
 import NeedsRepeatOptionInput from "../components/NeedsRepeatOptionInput";
 import { setDtmfOptions, setMenuName, setNeedsRepeat } from "../redux/actions/actionCreators";
+import FileExistsDialog from "../components/FileExistsDialog";
 
 const CreateGrammarPage = (props) => {
 
     const [isFirstRender, setIsFirstRender] = useState(true);
+    const [shouldOverwrite, setShouldOverwrite] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
+    const [canRedirect, setCanRedirect] = useState(false);
     const menuName = useSelector(state => state.menuName);
     const needsRepeat = useSelector(state => state.needsRepeat);
     const projectPath = useSelector(state => state.currentProject.path);
@@ -67,18 +71,22 @@ const CreateGrammarPage = (props) => {
 
     function createGrammar() {
         if (needsVoice) {
-            API.createGrammar(menuName, "voice", projectPath, needsRepeat, dtmfOptions)
+            API.createGrammar(menuName, "voice", projectPath, needsRepeat, dtmfOptions, shouldOverwrite)
                 .then((grammarRes) => {
-                    if (grammarRes.data) {
+                    if (grammarRes.data.FileCreated) {
                         props.enqueueSnackbar("Voice grammar was successfully created!", {
                             variant: "success",
                             autoHideDuration: 2000
                         });
+                        setCanRedirect(true);
+                    } else if (grammarRes.data.FileExists && !grammarRes.data.ShouldOverwrite) {
+                        setShowDialog(true);
                     } else {
                         props.enqueueSnackbar("There was a problem creating the voice grammar.", {
                             variant: "warning",
                             autoHideDuration: 2000
                         });
+                        setCanRedirect(true);
                     }
                 }).catch((err) => {
                 props.enqueueSnackbar("An error occurred when creating the voice grammar.", {
@@ -86,21 +94,26 @@ const CreateGrammarPage = (props) => {
                     autoHideDuration: 2000
                 });
                 console.log(err);
+                setCanRedirect(true);
             });
         }
         if (needsDTMF) {
-            API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions)
+            API.createGrammar(menuName, "dtmf", projectPath, needsRepeat, dtmfOptions, shouldOverwrite)
                 .then((grammarRes) => {
-                    if (grammarRes.data) {
+                    if (grammarRes.data.FileCreated) {
                         props.enqueueSnackbar("DTMF grammar was successfully created!", {
                             variant: "success",
                             autoHideDuration: 2000
                         });
+                        setCanRedirect(true);
+                    } else if (grammarRes.data.FileExists && !grammarRes.data.ShouldOverwrite) {
+                        setShowDialog(true);
                     } else {
                         props.enqueueSnackbar("There was a problem creating the dtmf grammar.", {
                             variant: "warning",
                             autoHideDuration: 2000
                         });
+                        setCanRedirect(true);
                     }
                 }).catch((err) => {
                 props.enqueueSnackbar("An error occurred when creating the dtmf grammar.", {
@@ -108,6 +121,7 @@ const CreateGrammarPage = (props) => {
                     autoHideDuration: 2000
                 });
                 console.log(err);
+                setCanRedirect(true);
             });
         }
     }
@@ -131,8 +145,21 @@ const CreateGrammarPage = (props) => {
         };
     }
 
+    function yesOnClick() {
+        setShouldOverwrite(true);
+        setShowDialog(false);
+    }
+
+    function noOnClick() {
+        setShouldOverwrite(false);
+        setShowDialog(false);
+    }
+
     return (
-        <StepForm steps={steps} onSubmit={createGrammar} />
+        <div>
+            <FileExistsDialog fileName={menuName} open={showDialog} yesOnClick={yesOnClick} noOnClick={noOnClick} />
+            <StepForm steps={steps} onSubmit={createGrammar} canRedirect={canRedirect} />
+        </div>
     );
 };
 

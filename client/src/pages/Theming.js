@@ -14,6 +14,7 @@ import AddProjectPage from "./AddProjectPage";
 import CreateGrammarPage from "./CreateGrammarPage";
 import CreateMenuPage from "./CreateMenuPage";
 import { SnackbarProvider } from "notistack";
+import EditProjectsPage from "./EditProjectsPage";
 
 const Theming = (props) => {
 
@@ -37,6 +38,7 @@ const Theming = (props) => {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/addProject" component={AddProjectPage} />
+                    <Route path="/editProjects" component={EditProjectsPage} />
                     <Route path="/createGrammar" component={CreateGrammarPage} />
                     <Route path="/createMenu" component={CreateMenuPage} />
                 </BrowserRouter>
