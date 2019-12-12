@@ -1,12 +1,11 @@
 import React from 'react';
-import { Radio, Typography } from "@material-ui/core";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { useDispatch, useSelector } from "react-redux";
-import { setDefaultRouteTo } from "../redux/actions/actionCreators";
+import { Radio, Typography } from '@material-ui/core';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDefaultRouteTo } from '../redux/actions/actionCreators';
 
 const DefaultRouteTypeInput = () => {
-
     const defaultRouteTo = useSelector(state => state.defaultRouteTo);
     const dispatch = useDispatch();
 
@@ -18,15 +17,25 @@ const DefaultRouteTypeInput = () => {
             <RadioGroup>
                 <FormControlLabel
                     value="calltype"
-                    control={<Radio color="secondary" checked={defaultRouteTo === "calltype"} />}
+                    control={
+                        <Radio
+                            color="secondary"
+                            checked={defaultRouteTo === 'calltype'}
+                        />
+                    }
                     label="Calltype"
-                    onClick={() => dispatch(setDefaultRouteTo("calltype"))}
+                    onClick={() => dispatch(setDefaultRouteTo('calltype'))}
                 />
                 <FormControlLabel
                     value="menu"
-                    control={<Radio color="secondary" checked={defaultRouteTo === "menu"} />}
+                    control={
+                        <Radio
+                            color="secondary"
+                            checked={defaultRouteTo === 'menu'}
+                        />
+                    }
                     label="Menu"
-                    onClick={() => dispatch(setDefaultRouteTo("menu"))}
+                    onClick={() => dispatch(setDefaultRouteTo('menu'))}
                 />
             </RadioGroup>
         </div>

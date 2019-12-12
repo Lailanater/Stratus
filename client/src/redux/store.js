@@ -1,19 +1,19 @@
-import { createStore } from "redux";
-import rootReducer from "./reducers";
-import { loadState } from "../localStorage";
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+import { loadState } from '../localStorage';
 
 let initialState = loadState();
 
 if (initialState === undefined) {
     initialState = {
         isAppMenuDisplayed: false,
-        theme: "dark",
-        currentProject: "",
+        theme: 'dark',
+        currentProject: '',
         projects: [],
-        menuName: "",
+        menuName: '',
         needsRepeat: false,
         dtmfOptions: [],
-        defaultRouteTo: "menu"
+        defaultRouteTo: 'menu'
     };
 }
 

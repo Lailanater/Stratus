@@ -1,30 +1,29 @@
 import React from 'react';
 
-import { ThemeProvider } from "@material-ui/styles";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import { ThemeProvider } from '@material-ui/styles';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
-import Header from "../components/Header";
-import {BrowserRouter, Redirect, Route} from "react-router-dom";
-import HomePage from "./HomePage";
-import SettingsPage from "./SettingsPage";
-import AddProjectPage from "./AddProjectPage";
-import CreateGrammarPage from "./CreateGrammarPage";
-import CreateMenuPage from "./CreateMenuPage";
-import { SnackbarProvider } from "notistack";
-import EditProjectsPage from "./EditProjectsPage";
+import Header from '../components/Header';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import HomePage from './HomePage';
+import SettingsPage from './SettingsPage';
+import AddProjectPage from './AddProjectPage';
+import CreateGrammarPage from './CreateGrammarPage';
+import CreateMenuPage from './CreateMenuPage';
+import { SnackbarProvider } from 'notistack';
+import EditProjectsPage from './EditProjectsPage';
 
-const Theming = (props) => {
-
+const Theming = props => {
     const theme = useSelector(state => state.theme);
 
     let currentTheme = createMuiTheme({
         palette: {
             type: theme,
-            primary: {main: '#00838F'},
-            secondary: {main: '#ed407a'}
+            primary: { main: '#00838F' },
+            secondary: { main: '#ed407a' }
         }
     });
 
@@ -39,7 +38,10 @@ const Theming = (props) => {
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/addProject" component={AddProjectPage} />
                     <Route path="/editProjects" component={EditProjectsPage} />
-                    <Route path="/createGrammar" component={CreateGrammarPage} />
+                    <Route
+                        path="/createGrammar"
+                        component={CreateGrammarPage}
+                    />
                     <Route path="/createMenu" component={CreateMenuPage} />
                 </BrowserRouter>
             </SnackbarProvider>

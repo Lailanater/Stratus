@@ -1,5 +1,6 @@
 import {
-    ADD_PROJECT, REMOVE_PROJECT,
+    ADD_PROJECT,
+    REMOVE_PROJECT,
     SET_CURRENT_PROJECT,
     SET_DEFAULT_ROUTE_TO,
     SET_DTMF_OPTIONS,
@@ -7,7 +8,7 @@ import {
     SET_NEEDS_REPEAT,
     TOGGLE_APP_MENU,
     TOGGLE_THEME
-} from "../constants/actionTypes";
+} from '../constants/actionTypes';
 
 export function toggleAppMenu() {
     return {
@@ -70,5 +71,5 @@ export function removeProject(projectToRemove) {
     return {
         type: REMOVE_PROJECT,
         projectToRemove
-    }
+    };
 }

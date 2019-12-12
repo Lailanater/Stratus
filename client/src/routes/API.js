@@ -1,9 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
-const querystring = require("querystring");
+const querystring = require('querystring');
 
 export default {
-    createMenu: function (menuName, defaultRouteTo, projectPath, dtmfOptions, shouldOverwrite) {
+    createMenu: function(
+        menuName,
+        defaultRouteTo,
+        projectPath,
+        dtmfOptions,
+        shouldOverwrite
+    ) {
         const data = {
             menuName,
             defaultRouteTo,
@@ -12,10 +18,20 @@ export default {
             shouldOverwrite
         };
 
-        return axios.post('http://localhost:8080/api/createMenu', querystring.stringify(data));
+        return axios.post(
+            'http://localhost:8080/api/createMenu',
+            querystring.stringify(data)
+        );
     },
 
-    createGrammar: function (menuName, mode, projectPath, needsRepeat, dtmfOptions, shouldOverwrite) {
+    createGrammar: function(
+        menuName,
+        mode,
+        projectPath,
+        needsRepeat,
+        dtmfOptions,
+        shouldOverwrite
+    ) {
         const data = {
             menuName,
             mode,
@@ -25,6 +41,9 @@ export default {
             shouldOverwrite
         };
 
-        return axios.post('http://localhost:8080/api/createGrammar', querystring.stringify(data));
+        return axios.post(
+            'http://localhost:8080/api/createGrammar',
+            querystring.stringify(data)
+        );
     }
 };

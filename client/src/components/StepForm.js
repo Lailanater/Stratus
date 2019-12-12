@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import {Redirect} from "react-router-dom";
+import React, { useState } from 'react';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
+import { Redirect } from 'react-router-dom';
 
-const StepForm = (props) => {
+const StepForm = props => {
     const [activeStep, setActiveStep] = useState(0);
 
     const firstStep = 0;
@@ -29,13 +29,23 @@ const StepForm = (props) => {
     function getNextStepButton() {
         if (activeStep === lastStep) {
             return (
-                <Button id="nextButton" variant="contained" color="primary" onClick={sendFinishedForm}>
+                <Button
+                    id="nextButton"
+                    variant="contained"
+                    color="primary"
+                    onClick={sendFinishedForm}
+                >
                     Finish
                 </Button>
             );
         } else {
             return (
-                <Button id="nextButton" variant="contained" color="secondary" onClick={goNext}>
+                <Button
+                    id="nextButton"
+                    variant="contained"
+                    color="secondary"
+                    onClick={goNext}
+                >
                     Next
                 </Button>
             );
@@ -43,27 +53,29 @@ const StepForm = (props) => {
     }
 
     if (props.canRedirect) {
-        return <Redirect to="/"/>;
+        return <Redirect to="/" />;
     }
 
     return (
         <div>
             <Stepper activeStep={activeStep}>
-                {props.steps.map((step) =>
+                {props.steps.map(step => (
                     <Step key={step.label}>
                         <StepLabel>{step.label}</StepLabel>
                     </Step>
-                )}
+                ))}
             </Stepper>
             <div className="container">
-                <Button variant="contained" onClick={goBack} disabled={activeStep === firstStep}>
+                <Button
+                    variant="contained"
+                    onClick={goBack}
+                    disabled={activeStep === firstStep}
+                >
                     Previous
                 </Button>
                 {nextStepButton}
-                <br/>
-                <div id="stepContents">
-                    {currentStepComponent}
-                </div>
+                <br />
+                <div id="stepContents">{currentStepComponent}</div>
             </div>
         </div>
     );

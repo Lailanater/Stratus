@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
-import { useDispatch, useSelector } from "react-redux";
-import { setDtmfOptions } from "../redux/actions/actionCreators";
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDtmfOptions } from '../redux/actions/actionCreators';
 
-const OptionPicker = (props) => {
-
+const OptionPicker = props => {
     const dtmfOptions = useSelector(state => state.dtmfOptions);
     const [numOfOptions, setNumOfOptions] = useState(dtmfOptions.length);
     const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const OptionPicker = (props) => {
         for (let i = 0; i <= props.maxOptions; i++) {
             marks.push({
                 value: i,
-                label: i.toString(),
+                label: i.toString()
             });
         }
         return marks;
@@ -27,7 +26,7 @@ const OptionPicker = (props) => {
         let newDtmfOptions = dtmfOptions;
         if (dtmfOptions.length < newSize) {
             for (let i = dtmfOptions.length; i < newSize; i++) {
-                newDtmfOptions[i] = "calltype";
+                newDtmfOptions[i] = 'calltype';
             }
         } else if (dtmfOptions.length > newSize) {
             newDtmfOptions.length = newSize;

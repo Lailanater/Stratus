@@ -1,10 +1,9 @@
 import React from 'react';
-import TextField from "@material-ui/core/TextField";
-import { useDispatch, useSelector } from "react-redux";
-import { setMenuName } from "../redux/actions/actionCreators";
+import TextField from '@material-ui/core/TextField';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMenuName } from '../redux/actions/actionCreators';
 
-const MenuNameInput = (props) => {
-
+const MenuNameInput = props => {
     const menuName = useSelector(state => state.menuName);
     const dispatch = useDispatch();
 
@@ -16,7 +15,7 @@ const MenuNameInput = (props) => {
             helperText={props.helperText}
             required={true}
             value={menuName}
-            onChange={(e) => dispatch(setMenuName(e.target.value))}
+            onChange={e => dispatch(setMenuName(e.target.value))}
         />
     );
 };

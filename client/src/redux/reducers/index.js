@@ -1,5 +1,6 @@
 import {
-    ADD_PROJECT, REMOVE_PROJECT,
+    ADD_PROJECT,
+    REMOVE_PROJECT,
     SET_CURRENT_PROJECT,
     SET_DEFAULT_ROUTE_TO,
     SET_DTMF_OPTIONS,
@@ -7,8 +8,8 @@ import {
     SET_NEEDS_REPEAT,
     TOGGLE_APP_MENU,
     TOGGLE_THEME
-} from "../constants/actionTypes";
-import { objectsAreEqual } from "../../utils/helpers";
+} from '../constants/actionTypes';
+import { objectsAreEqual } from '../../utils/helpers';
 
 function rootReducer(state, action) {
     switch (action.type) {
@@ -17,11 +18,11 @@ function rootReducer(state, action) {
                 isAppMenuDisplayed: !state.isAppMenuDisplayed
             });
         case TOGGLE_THEME:
-            let choice = "";
-            if (state.theme === "dark") {
-                choice = "light";
+            let choice = '';
+            if (state.theme === 'dark') {
+                choice = 'light';
             } else {
-                choice = "dark";
+                choice = 'dark';
             }
             return Object.assign({}, state, {
                 theme: choice
@@ -51,11 +52,11 @@ function rootReducer(state, action) {
                 defaultRouteTo: action.defaultRouteTo
             });
         case REMOVE_PROJECT:
-            const filteredProjects = state.projects.filter((project) => {
-                return !objectsAreEqual(project, action.projectToRemove)
+            const filteredProjects = state.projects.filter(project => {
+                return !objectsAreEqual(project, action.projectToRemove);
             });
 
-            return state = {...state, projects: filteredProjects};
+            return (state = { ...state, projects: filteredProjects });
         default:
             return state;
     }
