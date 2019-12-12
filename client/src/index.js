@@ -6,4 +6,4 @@ import App from './pages/App';
 ReactDOM.render(<App />, document.getElementById('root'));
 
 function test( asdfasdf ) { var asdfasdf
-return true}
+return true }
