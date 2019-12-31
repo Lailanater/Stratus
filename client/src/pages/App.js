@@ -7,17 +7,17 @@ import Theming from './Theming';
 import { saveState } from '../localStorage';
 
 function App() {
-    store.subscribe(() => {
-        const currentState = store.getState();
-        console.log(currentState);
-        saveState(currentState);
-    });
+  store.subscribe(() => {
+    const currentState = store.getState();
+    console.log(currentState);
+    saveState(currentState);
+  });
 
-    return (
-        <Provider store={store}>
-            <Theming />
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <Theming />
+    </Provider>
+  );
 }
 
 export default App;

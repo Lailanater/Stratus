@@ -17,36 +17,33 @@ import { SnackbarProvider } from 'notistack';
 import EditProjectsPage from './EditProjectsPage';
 
 const Theming = props => {
-    const theme = useSelector(state => state.theme);
+  const theme = useSelector(state => state.theme);
 
-    let currentTheme = createMuiTheme({
-        palette: {
-            type: theme,
-            primary: { main: '#00838F' },
-            secondary: { main: '#ed407a' }
-        }
-    });
+  let currentTheme = createMuiTheme({
+    palette: {
+      type: theme,
+      primary: { main: '#00838F' },
+      secondary: { main: '#ed407a' }
+    }
+  });
 
-    return (
-        <ThemeProvider theme={currentTheme}>
-            <SnackbarProvider maxSnack={2}>
-                <CssBaseline />
-                <BrowserRouter>
-                    <Header />
-                    <Redirect to="/" />
-                    <Route exact path="/" component={HomePage} />
-                    <Route path="/settings" component={SettingsPage} />
-                    <Route path="/addProject" component={AddProjectPage} />
-                    <Route path="/editProjects" component={EditProjectsPage} />
-                    <Route
-                        path="/createGrammar"
-                        component={CreateGrammarPage}
-                    />
-                    <Route path="/createMenu" component={CreateMenuPage} />
-                </BrowserRouter>
-            </SnackbarProvider>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider theme={currentTheme}>
+      <SnackbarProvider maxSnack={2}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Header />
+          <Redirect to="/" />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/settings" component={SettingsPage} />
+          <Route path="/addProject" component={AddProjectPage} />
+          <Route path="/editProjects" component={EditProjectsPage} />
+          <Route path="/createGrammar" component={CreateGrammarPage} />
+          <Route path="/createMenu" component={CreateMenuPage} />
+        </BrowserRouter>
+      </SnackbarProvider>
+    </ThemeProvider>
+  );
 };
 
 export default Theming;

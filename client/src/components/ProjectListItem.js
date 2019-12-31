@@ -10,53 +10,47 @@ import { removeProject } from '../redux/actions/actionCreators';
 import { useDispatch } from 'react-redux';
 
 const ProjectListItem = props => {
-    const [deleteColor, setDeleteColor] = useState('inherit');
-    const dispatch = useDispatch();
+  const [deleteColor, setDeleteColor] = useState('inherit');
+  const dispatch = useDispatch();
 
-    function deleteProject() {
-        const projectToRemove = {
-            name: props.project.name,
-            path: props.project.path
-        };
+  function deleteProject() {
+    const projectToRemove = {
+      name: props.project.name,
+      path: props.project.path
+    };
 
-        dispatch(removeProject(projectToRemove));
-    }
+    dispatch(removeProject(projectToRemove));
+  }
 
-    return (
-        <div>
-            <Paper className="listItem" elevation={5}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Project Name</TableCell>
-                            <TableCell align="right">Project Path</TableCell>
-                            <TableCell />
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell align="left">
-                                {props.project.name}
-                            </TableCell>
-                            <TableCell align="right">
-                                {props.project.path}
-                            </TableCell>
-                            <TableCell align="right">
-                                <DeleteIcon
-                                    color={deleteColor}
-                                    onMouseOver={() => setDeleteColor('error')}
-                                    onMouseLeave={() =>
-                                        setDeleteColor('inherit')
-                                    }
-                                    onClick={deleteProject}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </Paper>
-        </div>
-    );
+  return (
+    <div>
+      <Paper className="listItem" elevation={5}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Project Name</TableCell>
+              <TableCell align="right">Project Path</TableCell>
+              <TableCell />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell align="left">{props.project.name}</TableCell>
+              <TableCell align="right">{props.project.path}</TableCell>
+              <TableCell align="right">
+                <DeleteIcon
+                  color={deleteColor}
+                  onMouseOver={() => setDeleteColor('error')}
+                  onMouseLeave={() => setDeleteColor('inherit')}
+                  onClick={deleteProject}
+                />
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
+  );
 };
 
 export default ProjectListItem;
