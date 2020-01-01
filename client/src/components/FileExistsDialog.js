@@ -5,6 +5,7 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
+import '../css/components/FileExistsDialog.css';
 
 const FileExistsDialog = props => {
   return (

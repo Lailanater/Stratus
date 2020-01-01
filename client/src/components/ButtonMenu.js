@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
+import '../css/button.css';
 
 const ButtonMenu = props => {
   const [nextPage, setNextPage] = useState('');

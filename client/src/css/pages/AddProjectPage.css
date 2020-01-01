@@ -1,0 +1,13 @@
+#selectDirectoryButton {
+  margin-top: 22px;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+#project-path-input {
+  width: 500px;
+}
+
+#project-name-input {
+  width: 350px;
+}

@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDtmfOptions } from '../redux/actions/actionCreators';
+import '../css/components/OptionPicker.css';
 
 const OptionPicker = props => {
   const dtmfOptions = useSelector(state => state.dtmfOptions);

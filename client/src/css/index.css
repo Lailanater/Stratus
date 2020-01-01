@@ -20,56 +20,6 @@ code {
   padding: 10px;
 }
 
-#stepContents {
-  margin-top: 10px;
-}
-
-#optionSlider {
-  width: 450px;
-}
-
-#nextButton {
-  margin-left: 5px;
-}
-
-#selectDirectoryButton {
-  margin-top: 22px;
-  padding: 10px;
-  margin-left: 10px;
-}
-
-#project-path-input {
-  width: 500px;
-}
-
-#project-name-input {
-  width: 350px;
-}
-
-#fileExistsDialogContainer {
-  padding: 20px;
-}
-
 .centerText {
   text-align: center;
-}
-
-#fileExistsDialogYesButton {
-  padding: 10px;
-}
-
-#fileExistsDialogNoButton {
-  margin-left: 20px;
-  padding: 10px;
-}
-
-#editProjectsPageButton {
-  margin-top: 20px;
-  margin-bottom: 25px;
-}
-
-.listItem {
-  margin-bottom: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
 }
