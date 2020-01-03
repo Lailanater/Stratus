@@ -4,7 +4,13 @@ import './css/index.css';
 import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootElement = document.getElementById('root');
+
+if (rootElement.hasChildNodes()) {
+    ReactDOM.hydrate(<App />, rootElement);
+} else {
+    ReactDOM.render(<App/>, rootElement);
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
