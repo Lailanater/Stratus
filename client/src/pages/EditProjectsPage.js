@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ProjectList from '../components/ProjectList';
 import { Redirect } from 'react-router';
+import '../css/pages/EditProjectsPage.css';
 
 const EditProjectsPage = () => {
   const [canRedirect, setCanRedirect] = useState(false);

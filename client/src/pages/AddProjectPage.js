@@ -7,6 +7,7 @@ import { addProject } from '../redux/actions/actionCreators';
 import { Redirect } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { objectsAreEqual } from '../utils/helpers';
+import '../css/pages/AddProjectPage.css';
 
 const { remote } = window.require('electron');
 const fs = remote.require('fs');

@@ -4,6 +4,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
+import '../css/components/StepForm.css';
 
 const StepForm = props => {
   const [activeStep, setActiveStep] = useState(0);

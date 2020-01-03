@@ -8,6 +8,8 @@ import TableBody from '@material-ui/core/TableBody';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProject } from '../redux/actions/actionCreators';
 import { useDispatch } from 'react-redux';
+import '../css/components/ProjectListItem.css';
+import '../css/button.css';
 
 const ProjectListItem = props => {
   const [deleteColor, setDeleteColor] = useState('inherit');

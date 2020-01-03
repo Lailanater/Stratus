@@ -1,0 +1,12 @@
+#fileExistsDialogContainer {
+  padding: 20px;
+}
+
+#fileExistsDialogYesButton {
+  padding: 10px;
+}
+
+#fileExistsDialogNoButton {
+  margin-left: 20px;
+  padding: 10px;
+}
