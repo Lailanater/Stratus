@@ -27,8 +27,7 @@
     "test": "./node_modules/.bin/react-scripts test",
     "dev": "./node_modules/.bin/concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "prepackage": "yarn build",
-    "package": "./node_modules/.bin/electron-builder build -c.extraMetadata.main=build/electron.js",
-    "postbuild": "react-snap"
+    "package": "./node_modules/.bin/electron-builder build -c.extraMetadata.main=build/electron.js"
   },
   "reactSnap": {
     "inlineCss": true
@@ -63,7 +62,6 @@
     "concurrently": "^5.0.0",
     "electron": "7.0.0",
     "electron-builder": "^22.1.0",
-    "react-snap": "^1.23.0",
     "wait-on": "^3.3.0"
   }
 }
