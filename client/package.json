@@ -29,9 +29,6 @@
     "prepackage": "yarn build",
     "package": "./node_modules/.bin/electron-builder build -c.extraMetadata.main=build/electron.js"
   },
-  "reactSnap": {
-    "inlineCss": true
-  },
   "build": {
     "appId": "com.electron-lail.stratus",
     "productName": "Stratus",
