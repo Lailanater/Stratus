@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
-import '../css/button.css';
 
 const ButtonMenu = props => {
   const [nextPage, setNextPage] = useState('');
@@ -53,9 +52,12 @@ const ButtonMenu = props => {
         Create Menu
       </Button>
       <Button
-        id="nextButton"
         variant="contained"
-        style={{ color: 'white', backgroundColor: '#40739e' }}
+        style={{
+          color: 'white',
+          backgroundColor: '#40739e',
+          marginLeft: '5px'
+        }}
         size="large"
         onClick={createGrammar}
       >

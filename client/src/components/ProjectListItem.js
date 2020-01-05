@@ -8,8 +8,13 @@ import TableBody from '@material-ui/core/TableBody';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProject } from '../redux/actions/actionCreators';
 import { useDispatch } from 'react-redux';
-import '../css/components/ProjectListItem.css';
-import '../css/button.css';
+import styled from 'styled-components';
+
+const Container = styled(Paper)`
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+`;
 
 const ProjectListItem = props => {
   const [deleteColor, setDeleteColor] = useState('inherit');
@@ -26,7 +31,7 @@ const ProjectListItem = props => {
 
   return (
     <div>
-      <Paper className="listItem" elevation={5}>
+      <Container elevation={5}>
         <Table>
           <TableHead>
             <TableRow>
@@ -50,7 +55,7 @@ const ProjectListItem = props => {
             </TableRow>
           </TableBody>
         </Table>
-      </Paper>
+      </Container>
     </div>
   );
 };
