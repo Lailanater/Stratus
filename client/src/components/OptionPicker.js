@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDtmfOptions } from '../redux/actions/actionCreators';
-import '../css/components/OptionPicker.css';
 
 const OptionPicker = props => {
   const dtmfOptions = useSelector(state => state.dtmfOptions);
@@ -48,7 +47,7 @@ const OptionPicker = props => {
         How many options are you going to need?
       </Typography>
       <Slider
-        id="optionSlider"
+        style={{ width: '450px' }}
         value={numOfOptions}
         step={1}
         valueLabelDisplay="auto"

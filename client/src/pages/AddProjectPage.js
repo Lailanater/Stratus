@@ -7,10 +7,18 @@ import { addProject } from '../redux/actions/actionCreators';
 import { Redirect } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { objectsAreEqual } from '../utils/helpers';
-import '../css/pages/AddProjectPage.css';
+import styled from 'styled-components';
 
 const { remote } = window.require('electron');
 const fs = remote.require('fs');
+
+const PathTextInput = styled(TextField)`
+  width: 500px;
+`;
+
+const NameTextInput = styled(TextField)`
+  width: 350px;
+`;
 
 const AddProjectPage = props => {
   const [canRedirect, setCanRedirect] = useState(false);
@@ -116,7 +124,7 @@ const AddProjectPage = props => {
     <div className="container">
       <Paper className="container">
         <Typography variant="h6">Project Path</Typography>
-        <TextField
+        <PathTextInput
           id="project-path-input"
           margin="normal"
           variant="outlined"
@@ -124,7 +132,7 @@ const AddProjectPage = props => {
         />
 
         <Button
-          id="selectDirectoryButton"
+          style={{ marginTop: '22px', padding: '10px', marginLeft: '10px' }}
           variant="contained"
           onClick={selectFolder}
         >
@@ -134,7 +142,11 @@ const AddProjectPage = props => {
         <br />
 
         <Typography variant="h6">Project Name</Typography>
-        <TextField id="project-name-input" margin="normal" variant="outlined" />
+        <NameTextInput
+          id="project-name-input"
+          margin="normal"
+          variant="outlined"
+        />
       </Paper>
 
       <br />

@@ -4,7 +4,11 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
-import '../css/components/StepForm.css';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  margin-top: 10px;
+`;
 
 const StepForm = props => {
   const [activeStep, setActiveStep] = useState(0);
@@ -31,7 +35,7 @@ const StepForm = props => {
     if (activeStep === lastStep) {
       return (
         <Button
-          id="nextButton"
+          style={{ marginLeft: '5px' }}
           variant="contained"
           color="primary"
           onClick={sendFinishedForm}
@@ -42,7 +46,7 @@ const StepForm = props => {
     } else {
       return (
         <Button
-          id="nextButton"
+          style={{ marginLeft: '5px' }}
           variant="contained"
           color="secondary"
           onClick={goNext}
@@ -76,7 +80,7 @@ const StepForm = props => {
         </Button>
         {nextStepButton}
         <br />
-        <div id="stepContents">{currentStepComponent}</div>
+        <StyledDiv>{currentStepComponent}</StyledDiv>
       </div>
     </div>
   );
