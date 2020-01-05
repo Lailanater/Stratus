@@ -8,6 +8,7 @@ export default {
     defaultRouteTo,
     projectPath,
     dtmfOptions,
+    needsRepeat,
     shouldOverwrite
   ) {
     const data = {
@@ -15,6 +16,7 @@ export default {
       defaultRouteTo,
       projectPath,
       dtmfOptions,
+      needsRepeat,
       shouldOverwrite
     };
 

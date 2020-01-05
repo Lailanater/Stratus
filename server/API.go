@@ -17,6 +17,7 @@ type GrammarData struct {
 type MenuData struct {
 	MenuName       string
 	DtmfOptions    []string
+	NeedsRepeat    bool
 	DefaultRouteTo string
 }
 
@@ -72,7 +73,7 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 	}
 }
 
-func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []string, shouldOverwrite bool) (bool, bool) {
+func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []string, needsRepeat bool, shouldOverwrite bool) (bool, bool) {
 	funcMap := template.FuncMap{
 		"inc": func(i int) int {
 			return i + 1
@@ -90,6 +91,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 	data := MenuData{
 		MenuName:       menuName,
 		DtmfOptions:    dtmfOptions,
+		NeedsRepeat:    needsRepeat,
 		DefaultRouteTo: defaultRouteTo,
 	}
 

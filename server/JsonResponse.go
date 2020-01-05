@@ -6,8 +6,8 @@ import (
 )
 
 type JsonReply struct {
-	FileCreated bool
-	FileExists bool
+	FileCreated     bool
+	FileExists      bool
 	ShouldOverwrite bool
 }
 

@@ -76,7 +76,7 @@
 				<if cond="repeatLimitReached">
 					<log expr="applicationName + ': ' + currentPage + ': Repeat limit has been reached throwing state.repeat.limit'" />
 					<throw event="state.repeat.limit" />
-					<else />
+				<else />
 					<goto next="#{{ .MenuName }}PromptForm" />
 				</if>
 			{{- end}}

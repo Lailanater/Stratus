@@ -80,6 +80,7 @@ const CreateMenuPage = props => {
       defaultRouteTo,
       projectPath,
       dtmfOptions,
+      needsRepeat,
       shouldOverwrite
     )
       .then(menuRes => {

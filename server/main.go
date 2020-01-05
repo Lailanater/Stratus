@@ -27,17 +27,20 @@ func createMenuHandler(w http.ResponseWriter, r *http.Request) {
 	defaultRouteTo := r.PostFormValue("defaultRouteTo")
 	projectPath := r.PostFormValue("projectPath")
 	shouldOverwriteString := r.PostFormValue("shouldOverwrite")
+	needsRepeatString := r.PostFormValue("needsRepeat")
+	needsRepeat, _ := strconv.ParseBool(needsRepeatString)
 	shouldOverwrite, _ := strconv.ParseBool(shouldOverwriteString)
 
 	fmt.Println("Menu Name:\t\t\t", menuName)
 	fmt.Println("Default Route To:\t", defaultRouteTo)
 	fmt.Println("Project Path:\t\t", projectPath)
+	fmt.Println("Needs Repeat:\t\t", needsRepeat)
 	fmt.Println("Should Overwrite:\t", shouldOverwrite)
 	for i, v := range dtmfOptions {
 		fmt.Println("Option "+strconv.Itoa(i+1)+" Goes To:\t", v)
 	}
 
-	fileCreated, fileExists := CreateMenu(menuName, defaultRouteTo, projectPath, dtmfOptions, shouldOverwrite)
+	fileCreated, fileExists := CreateMenu(menuName, defaultRouteTo, projectPath, dtmfOptions, needsRepeat, shouldOverwrite)
 
 	if fileCreated {
 		fmt.Println("Menu was created!")
