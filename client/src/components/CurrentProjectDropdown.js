@@ -10,15 +10,31 @@ const CurrentProjectDropdown = props => {
   const dispatch = useDispatch();
 
   function handleOnChange(e) {
-    dispatch(setCurrentProject(e.target.value));
+    const selectedProject = getProjectObjByName(e.target.value);
+    dispatch(setCurrentProject(selectedProject));
+  }
+
+  function getProjectObjByName(projectName) {
+    return projects.find(project => projectName === project.name);
+  }
+
+  function projectDoesExist() {
+    return (
+      projects.find(project => project.name === currentProject.name) !==
+      undefined
+    );
+  }
+
+  if ((projects.length === 0 && currentProject !== '') || !projectDoesExist()) {
+    dispatch(setCurrentProject(''));
   }
 
   return (
     <Paper className="container" elevation={5}>
       <InputLabel>Current Project</InputLabel>
-      <Select value={currentProject} onChange={handleOnChange}>
+      <Select value={currentProject.name} onChange={handleOnChange}>
         {projects.map(project => (
-          <MenuItem key={project.name.toString()} value={project}>
+          <MenuItem key={project.name} value={project.name}>
             {project.name}
           </MenuItem>
         ))}
