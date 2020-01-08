@@ -1,9 +1,12 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import {setIsNextButtonDisabled, setMenuName} from '../redux/actions/actionCreators';
+import {
+  setIsNextButtonDisabled,
+  setMenuName
+} from '../redux/actions/actionCreators';
 
-const MenuNameInput = props => {
+const PageNameInput = props => {
   const menuName = useSelector(state => state.menuName);
   const isNextButtonDisabled = useSelector(state => state.isNextButtonDisabled);
   const dispatch = useDispatch();
@@ -28,4 +31,4 @@ const MenuNameInput = props => {
   );
 };
 
-export default MenuNameInput;
+export default PageNameInput;

@@ -4,7 +4,7 @@ import StepForm from '../components/StepForm';
 import OptionPicker from '../components/OptionPicker';
 import API from '../routes/API';
 import { useDispatch, useSelector } from 'react-redux';
-import MenuNameInput from '../components/MenuNameInput';
+import PageNameInput from '../components/PageNameInput';
 import NeedsRepeatOptionInput from '../components/NeedsRepeatOptionInput';
 import {
   setDtmfOptions,
@@ -12,7 +12,7 @@ import {
   setNeedsRepeat
 } from '../redux/actions/actionCreators';
 import FileExistsDialog from '../components/FileExistsDialog';
-import SelectGrammarType from "../components/SelectGrammarType";
+import SelectGrammarType from '../components/SelectGrammarType';
 
 const CreateGrammarPage = props => {
   const [isFirstRender, setIsFirstRender] = useState(true);
@@ -43,12 +43,11 @@ const CreateGrammarPage = props => {
     }
   }, [menuName, needsRepeat, dtmfOptions, dispatch, isFirstRender]);
 
-  const grammarName = (
-    <MenuNameInput helperText="Enter the name of the menu you are creating grammar(s) for" />
-  );
-
   let steps = [];
-  addStep('Enter The Name of The Menu to Make Grammar(s) for', grammarName);
+  addStep(
+    'Enter The Name of The Menu to Make Grammar(s) for',
+    <PageNameInput helperText="Enter the name of the menu you are creating grammar(s) for" />
+  );
   addStep('Select DTMF Options', <OptionPicker maxOptions={9} />);
   addStep('Repeat?', <NeedsRepeatOptionInput />);
   addStep('Select Type of Grammar(s)', <SelectGrammarType />);

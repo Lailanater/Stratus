@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import StepForm from '../components/StepForm';
 import OptionPicker from '../components/OptionPicker';
-import MenuNameInput from '../components/MenuNameInput';
+import PageNameInput from '../components/PageNameInput';
 import NeedsRepeatOptionInput from '../components/NeedsRepeatOptionInput';
 import OptionTypeView from '../components/OptionTypeView';
 import DefaultRouteTypeInput from '../components/DefaultRouteTypeInput';
@@ -57,7 +57,7 @@ const CreateMenuPage = props => {
   let steps = [];
   addStep(
     'Enter The Name of The Menu to Make Grammar(s) for',
-    <MenuNameInput />
+    <PageNameInput />
   );
   addStep('Select DTMF Options', <OptionPicker maxOptions={9} />);
   addStep('Repeat?', <NeedsRepeatOptionInput />);
