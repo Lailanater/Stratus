@@ -8,9 +8,7 @@ import { Redirect } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { objectsAreEqual } from '../utils/helpers';
 import styled from 'styled-components';
-
-const { remote } = window.require('electron');
-const fs = remote.require('fs');
+import isElectron from 'is-electron';
 
 const PathTextInput = styled(TextField)`
   width: 500px;
@@ -49,7 +47,13 @@ const AddProjectPage = props => {
   }
 
   function isValidPath(path) {
-    return fs.existsSync(path);
+    if (!isElectron()) {
+      return true; // Cannot validate the path. Assume given is valid.
+    } else {
+      const { remote } = window.require('electron');
+      const fs = remote.require('fs');
+      return fs.existsSync(path);
+    }
   }
 
   function projectAlreadyExists(projectName, projectPath) {
@@ -97,23 +101,28 @@ const AddProjectPage = props => {
   }
 
   function selectFolder() {
-    const options = {
-      properties: ['openDirectory']
-    };
+    if (isElectron()) {
+      const options = {
+        properties: ['openDirectory']
+      };
 
-    remote.dialog.showOpenDialog(options).then(result => {
-      let selectedDirectory = result.filePaths[0];
-      if (selectedDirectory === undefined) {
-        selectedDirectory = '';
-      }
+      const { remote } = window.require('electron');
+      remote.dialog.showOpenDialog(options).then(result => {
+        let selectedDirectory = result.filePaths[0];
+        if (selectedDirectory === undefined) {
+          selectedDirectory = '';
+        }
 
-      document.querySelector(
-        '#project-path-input'
-      ).value = replaceBacklashesWithForwardSlashes(selectedDirectory);
-      document.querySelector(
-        '#project-name-input'
-      ).value = getTextAfterLastSlash();
-    });
+        document.querySelector(
+          '#project-path-input'
+        ).value = replaceBacklashesWithForwardSlashes(selectedDirectory);
+        document.querySelector(
+          '#project-name-input'
+        ).value = getTextAfterLastSlash();
+      });
+    } else {
+      alert('This function is not available on the web.');
+    }
   }
 
   if (canRedirect) {
