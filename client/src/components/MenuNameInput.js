@@ -1,11 +1,18 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMenuName } from '../redux/actions/actionCreators';
+import {setIsNextButtonDisabled, setMenuName} from '../redux/actions/actionCreators';
 
 const MenuNameInput = props => {
   const menuName = useSelector(state => state.menuName);
+  const isNextButtonDisabled = useSelector(state => state.isNextButtonDisabled);
   const dispatch = useDispatch();
+
+  if (menuName === '' && !isNextButtonDisabled) {
+    dispatch(setIsNextButtonDisabled(true));
+  } else if (menuName !== '' && isNextButtonDisabled) {
+    dispatch(setIsNextButtonDisabled(false));
+  }
 
   return (
     <TextField
@@ -14,8 +21,9 @@ const MenuNameInput = props => {
       variant="outlined"
       helperText={props.helperText}
       required={true}
+      error={menuName.length === 0}
       value={menuName}
-      onChange={e => dispatch(setMenuName(e.target.value))}
+      onChange={e => dispatch(setMenuName(e.target.value.trim()))}
     />
   );
 };

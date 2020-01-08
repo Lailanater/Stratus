@@ -3,9 +3,9 @@ import {
   REMOVE_PROJECT,
   SET_CURRENT_PROJECT,
   SET_DEFAULT_ROUTE_TO,
-  SET_DTMF_OPTIONS,
-  SET_MENU_NAME,
-  SET_NEEDS_REPEAT,
+  SET_DTMF_OPTIONS, SET_IS_FINISH_BUTTON_DISABLED, SET_IS_NEXT_BUTTON_DISABLED,
+  SET_MENU_NAME, SET_NEEDS_DTMF,
+  SET_NEEDS_REPEAT, SET_NEEDS_VOICE,
   TOGGLE_APP_MENU,
   TOGGLE_THEME
 } from '../constants/actionTypes';
@@ -57,6 +57,14 @@ function rootReducer(state, action) {
       });
 
       return (state = { ...state, projects: filteredProjects });
+    case SET_IS_NEXT_BUTTON_DISABLED:
+      return {...state, isNextButtonDisabled: action.isNextButtonDisabled};
+    case SET_IS_FINISH_BUTTON_DISABLED:
+      return {...state, isFinishButtonDisabled: action.isFinishButtonDisabled};
+    case SET_NEEDS_DTMF:
+      return {...state, needsDtmf: action.needsDtmf};
+    case SET_NEEDS_VOICE:
+      return {...state, needsVoice: action.needsVoice};
     default:
       return state;
   }

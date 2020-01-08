@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Typography from '@material-ui/core/Typography';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
 import { useSnackbar } from 'notistack';
 import StepForm from '../components/StepForm';
 import OptionPicker from '../components/OptionPicker';
@@ -17,6 +12,7 @@ import {
   setNeedsRepeat
 } from '../redux/actions/actionCreators';
 import FileExistsDialog from '../components/FileExistsDialog';
+import SelectGrammarType from "../components/SelectGrammarType";
 
 const CreateGrammarPage = props => {
   const [isFirstRender, setIsFirstRender] = useState(true);
@@ -28,8 +24,8 @@ const CreateGrammarPage = props => {
   const projectPath = useSelector(state => state.currentProject.path);
   const dtmfOptions = useSelector(state => state.dtmfOptions);
   const dispatch = useDispatch();
-  const [needsDTMF, setNeedsDTMF] = useState(false);
-  const [needsVoice, setNeedsVoice] = useState(false);
+  const needsDtmf = useSelector(state => state.needsDtmf);
+  const needsVoice = useSelector(state => state.needsVoice);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -51,39 +47,11 @@ const CreateGrammarPage = props => {
     <MenuNameInput helperText="Enter the name of the menu you are creating grammar(s) for" />
   );
 
-  const selectGrammarType = (
-    <FormControl component="fieldset">
-      <Typography>Which Type(s) of Grammars Do You Need?</Typography>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={needsDTMF}
-              onChange={handleChange}
-              value="dtmf"
-            />
-          }
-          label="DTMF"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={needsVoice}
-              onChange={handleChange}
-              value="voice"
-            />
-          }
-          label="Voice"
-        />
-      </FormGroup>
-    </FormControl>
-  );
-
   let steps = [];
   addStep('Enter The Name of The Menu to Make Grammar(s) for', grammarName);
   addStep('Select DTMF Options', <OptionPicker maxOptions={9} />);
   addStep('Repeat?', <NeedsRepeatOptionInput />);
-  addStep('Select Type of Grammar(s)', selectGrammarType);
+  addStep('Select Type of Grammar(s)', <SelectGrammarType />);
 
   function createGrammar() {
     if (needsVoice) {
@@ -127,7 +95,7 @@ const CreateGrammarPage = props => {
           setCanRedirect(true);
         });
     }
-    if (needsDTMF) {
+    if (needsDtmf) {
       API.createGrammar(
         menuName,
         'dtmf',
@@ -164,14 +132,6 @@ const CreateGrammarPage = props => {
           console.log(err);
           setCanRedirect(true);
         });
-    }
-  }
-
-  function handleChange(event) {
-    if (event.currentTarget.value === 'dtmf') {
-      setNeedsDTMF(!needsDTMF);
-    } else {
-      setNeedsVoice(!needsVoice);
     }
   }
 

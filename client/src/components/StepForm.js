@@ -5,9 +5,12 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
 import { StyledDiv } from '../components/styles/div.style';
+import {useSelector} from "react-redux";
 
 const StepForm = props => {
   const [activeStep, setActiveStep] = useState(0);
+  const isNextButtonDisabled = useSelector(state => state.isNextButtonDisabled);
+  const isFinishButtonDisabled = useSelector(state => state.isFinishButtonDisabled);
 
   const firstStep = 0;
   const lastStep = props.steps.length - 1;
@@ -35,6 +38,7 @@ const StepForm = props => {
           variant="contained"
           color="primary"
           onClick={sendFinishedForm}
+          disabled={isFinishButtonDisabled}
         >
           Finish
         </Button>
@@ -46,6 +50,7 @@ const StepForm = props => {
           variant="contained"
           color="secondary"
           onClick={goNext}
+          disabled={isNextButtonDisabled}
         >
           Next
         </Button>
