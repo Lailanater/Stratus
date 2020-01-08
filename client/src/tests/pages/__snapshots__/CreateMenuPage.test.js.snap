@@ -273,8 +273,8 @@ exports[`renders without crashing 1`] = `
         </span>
       </button>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary"
-        disabled={false}
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary Mui-disabled Mui-disabled"
+        disabled={true}
         onBlur={[Function]}
         onClick={[Function]}
         onDragLeave={[Function]}
@@ -292,7 +292,7 @@ exports[`renders without crashing 1`] = `
             "marginLeft": "5px",
           }
         }
-        tabIndex={0}
+        tabIndex={-1}
         type="button"
       >
         <span
@@ -309,23 +309,23 @@ exports[`renders without crashing 1`] = `
           className="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal"
         >
           <label
-            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
             data-shrink={false}
           >
             Menu Name
             <span
-              className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              className="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
             >
                
               *
             </span>
           </label>
           <div
-            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+            className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl"
             onClick={[Function]}
           >
             <input
-              aria-invalid={false}
+              aria-invalid={true}
               autoFocus={false}
               className="MuiInputBase-input MuiOutlinedInput-input"
               disabled={false}

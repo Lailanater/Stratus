@@ -12,8 +12,12 @@ if (initialState === undefined) {
     projects: [],
     menuName: '',
     needsRepeat: false,
+    needsDtmf: false,
+    needsVoice: false,
     dtmfOptions: [],
-    defaultRouteTo: 'menu'
+    defaultRouteTo: 'menu',
+    isNextButtonDisabled: false,
+    isFinishButtonDisabled: false
   };
 }
 

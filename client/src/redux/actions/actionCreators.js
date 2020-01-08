@@ -4,8 +4,12 @@ import {
   SET_CURRENT_PROJECT,
   SET_DEFAULT_ROUTE_TO,
   SET_DTMF_OPTIONS,
+  SET_IS_FINISH_BUTTON_DISABLED,
+  SET_IS_NEXT_BUTTON_DISABLED,
   SET_MENU_NAME,
+  SET_NEEDS_DTMF,
   SET_NEEDS_REPEAT,
+  SET_NEEDS_VOICE,
   TOGGLE_APP_MENU,
   TOGGLE_THEME
 } from '../constants/actionTypes';
@@ -71,5 +75,33 @@ export function removeProject(projectToRemove) {
   return {
     type: REMOVE_PROJECT,
     projectToRemove
+  };
+}
+
+export function setIsNextButtonDisabled(isNextButtonDisabled) {
+  return {
+    type: SET_IS_NEXT_BUTTON_DISABLED,
+    isNextButtonDisabled
+  };
+}
+
+export function setIsFinishButtonDisabled(isFinishButtonDisabled) {
+  return {
+    type: SET_IS_FINISH_BUTTON_DISABLED,
+    isFinishButtonDisabled
+  };
+}
+
+export function setNeedsDtmf(needsDtmf) {
+  return {
+    type: SET_NEEDS_DTMF,
+    needsDtmf
+  };
+}
+
+export function setNeedsVoice(needsVoice) {
+  return {
+    type: SET_NEEDS_VOICE,
+    needsVoice
   };
 }
