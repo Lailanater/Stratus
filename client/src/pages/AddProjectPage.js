@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
+import {
+  NameTextInput,
+  PathTextInput
+} from '../components/styles/TextField.style';
 import Button from '@material-ui/core/Button';
 import { Paper, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,16 +10,7 @@ import { addProject } from '../redux/actions/actionCreators';
 import { Redirect } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { objectsAreEqual } from '../utils/helpers';
-import styled from 'styled-components';
 import isElectron from 'is-electron';
-
-const PathTextInput = styled(TextField)`
-  width: 500px;
-`;
-
-const NameTextInput = styled(TextField)`
-  width: 350px;
-`;
 
 const AddProjectPage = props => {
   const [canRedirect, setCanRedirect] = useState(false);

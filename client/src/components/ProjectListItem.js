@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
 import { TableCell } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -8,13 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProject } from '../redux/actions/actionCreators';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-
-const Container = styled(Paper)`
-  margin-bottom: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
-`;
+import { Container } from '../components/styles/Paper.style';
 
 const ProjectListItem = props => {
   const [deleteColor, setDeleteColor] = useState('inherit');

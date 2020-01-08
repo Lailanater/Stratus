@@ -5,11 +5,7 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
-import styled from 'styled-components';
-
-const DialogContainer = styled.div`
-  padding: 20px;
-`;
+import { DialogContainer } from '../components/styles/div.style';
 
 const FileExistsDialog = props => {
   return (
