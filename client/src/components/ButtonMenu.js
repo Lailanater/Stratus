@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
-import { withSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 
 const ButtonMenu = props => {
   const [nextPage, setNextPage] = useState('');
   const [canRedirect, setCanRedirect] = useState(false);
   const currentProject = useSelector(state => state.currentProject);
+  const { enqueueSnackbar } = useSnackbar();
 
   function createMenu() {
     if (currentProject === '') {
       setCanRedirect(false);
-      props.enqueueSnackbar('You must select a project first', {
+      enqueueSnackbar('You must select a project first', {
         variant: 'error',
         autoHideDuration: 2000
       });
@@ -26,7 +27,7 @@ const ButtonMenu = props => {
   function createGrammar() {
     if (currentProject === '') {
       setCanRedirect(false);
-      props.enqueueSnackbar('You must select a project first', {
+      enqueueSnackbar('You must select a project first', {
         variant: 'error',
         autoHideDuration: 2000
       });
@@ -67,4 +68,4 @@ const ButtonMenu = props => {
   );
 };
 
-export default withSnackbar(ButtonMenu);
+export default ButtonMenu;

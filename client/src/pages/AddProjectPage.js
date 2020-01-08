@@ -8,7 +8,7 @@ import { Paper, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProject } from '../redux/actions/actionCreators';
 import { Redirect } from 'react-router-dom';
-import { withSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import { objectsAreEqual } from '../utils/helpers';
 import isElectron from 'is-electron';
 
@@ -16,6 +16,7 @@ const AddProjectPage = props => {
   const [canRedirect, setCanRedirect] = useState(false);
   const projects = useSelector(state => state.projects);
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   function setDefaultProjectName() {
     console.log(document.querySelector('#project-name-input').value);
@@ -70,7 +71,7 @@ const AddProjectPage = props => {
     const projectPath = document.querySelector('#project-path-input').value;
 
     if (projectName === '' || projectPath === '') {
-      props.enqueueSnackbar('Please update both fields first', {
+      enqueueSnackbar('Please update both fields first', {
         variant: 'error',
         autoHideDuration: 2000
       });
@@ -80,13 +81,13 @@ const AddProjectPage = props => {
           dispatch(addProject(projectName, projectPath));
           setCanRedirect(true);
         } else {
-          props.enqueueSnackbar('The project you entered already exists', {
+          enqueueSnackbar('The project you entered already exists', {
             variant: 'error',
             autoHideDuration: 2000
           });
         }
       } else {
-        props.enqueueSnackbar('The path you have entered is not valid', {
+        enqueueSnackbar('The path you have entered is not valid', {
           variant: 'error',
           autoHideDuration: 2000
         });
@@ -161,4 +162,4 @@ const AddProjectPage = props => {
   );
 };
 
-export default withSnackbar(AddProjectPage);
+export default AddProjectPage;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import StepForm from '../components/StepForm';
 import OptionPicker from '../components/OptionPicker';
 import MenuNameInput from '../components/MenuNameInput';
@@ -27,6 +27,7 @@ const CreateMenuPage = props => {
   const dtmfOptions = useSelector(state => state.dtmfOptions);
   const defaultRouteTo = useSelector(state => state.defaultRouteTo);
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (isFirstRender) {
@@ -95,38 +96,29 @@ const CreateMenuPage = props => {
           )
             .then(grammarRes => {
               if (grammarRes.data) {
-                props.enqueueSnackbar(
-                  'Menu & grammar were successfully created!',
-                  {
-                    variant: 'success',
-                    autoHideDuration: 2000
-                  }
-                );
+                enqueueSnackbar('Menu & grammar were successfully created!', {
+                  variant: 'success',
+                  autoHideDuration: 2000
+                });
               } else {
-                props.enqueueSnackbar(
-                  'There was a problem creating the grammar.',
-                  {
-                    variant: 'warning',
-                    autoHideDuration: 2000
-                  }
-                );
+                enqueueSnackbar('There was a problem creating the grammar.', {
+                  variant: 'warning',
+                  autoHideDuration: 2000
+                });
               }
             })
             .catch(err => {
-              props.enqueueSnackbar(
-                'An error occurred when creating the grammar.',
-                {
-                  variant: 'error',
-                  autoHideDuration: 2000
-                }
-              );
+              enqueueSnackbar('An error occurred when creating the grammar.', {
+                variant: 'error',
+                autoHideDuration: 2000
+              });
               console.log(err);
             });
           setCanRedirect(true);
         } else if (menuRes.data.FileExists && !menuRes.data.ShouldOverwrite) {
           setShowDialog(true);
         } else {
-          props.enqueueSnackbar('There was a problem creating the menu.', {
+          enqueueSnackbar('There was a problem creating the menu.', {
             variant: 'warning',
             autoHideDuration: 2000
           });
@@ -134,7 +126,7 @@ const CreateMenuPage = props => {
         }
       })
       .catch(err => {
-        props.enqueueSnackbar('An error occurred when creating the menu.', {
+        enqueueSnackbar('An error occurred when creating the menu.', {
           variant: 'error',
           autoHideDuration: 2000
         });
@@ -146,7 +138,7 @@ const CreateMenuPage = props => {
   function yesOnClick() {
     setShouldOverwrite(true);
     setShowDialog(false);
-    props.enqueueSnackbar(
+    enqueueSnackbar(
       'To continue with overwriting the menu click Finish again.',
       {
         variant: 'info',
@@ -173,4 +165,4 @@ const CreateMenuPage = props => {
   );
 };
 
-export default withSnackbar(CreateMenuPage);
+export default CreateMenuPage;

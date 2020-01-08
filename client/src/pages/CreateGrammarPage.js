@@ -4,7 +4,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
-import { withSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import StepForm from '../components/StepForm';
 import OptionPicker from '../components/OptionPicker';
 import API from '../routes/API';
@@ -30,6 +30,7 @@ const CreateGrammarPage = props => {
   const dispatch = useDispatch();
   const [needsDTMF, setNeedsDTMF] = useState(false);
   const [needsVoice, setNeedsVoice] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (isFirstRender) {
@@ -96,7 +97,7 @@ const CreateGrammarPage = props => {
       )
         .then(grammarRes => {
           if (grammarRes.data.FileCreated) {
-            props.enqueueSnackbar('Voice grammar was successfully created!', {
+            enqueueSnackbar('Voice grammar was successfully created!', {
               variant: 'success',
               autoHideDuration: 2000
             });
@@ -107,18 +108,15 @@ const CreateGrammarPage = props => {
           ) {
             setShowDialog(true);
           } else {
-            props.enqueueSnackbar(
-              'There was a problem creating the voice grammar.',
-              {
-                variant: 'warning',
-                autoHideDuration: 2000
-              }
-            );
+            enqueueSnackbar('There was a problem creating the voice grammar.', {
+              variant: 'warning',
+              autoHideDuration: 2000
+            });
             setCanRedirect(true);
           }
         })
         .catch(err => {
-          props.enqueueSnackbar(
+          enqueueSnackbar(
             'An error occurred when creating the voice grammar.',
             {
               variant: 'error',
@@ -140,7 +138,7 @@ const CreateGrammarPage = props => {
       )
         .then(grammarRes => {
           if (grammarRes.data.FileCreated) {
-            props.enqueueSnackbar('DTMF grammar was successfully created!', {
+            enqueueSnackbar('DTMF grammar was successfully created!', {
               variant: 'success',
               autoHideDuration: 2000
             });
@@ -151,24 +149,18 @@ const CreateGrammarPage = props => {
           ) {
             setShowDialog(true);
           } else {
-            props.enqueueSnackbar(
-              'There was a problem creating the dtmf grammar.',
-              {
-                variant: 'warning',
-                autoHideDuration: 2000
-              }
-            );
+            enqueueSnackbar('There was a problem creating the dtmf grammar.', {
+              variant: 'warning',
+              autoHideDuration: 2000
+            });
             setCanRedirect(true);
           }
         })
         .catch(err => {
-          props.enqueueSnackbar(
-            'An error occurred when creating the dtmf grammar.',
-            {
-              variant: 'error',
-              autoHideDuration: 2000
-            }
-          );
+          enqueueSnackbar('An error occurred when creating the dtmf grammar.', {
+            variant: 'error',
+            autoHideDuration: 2000
+          });
           console.log(err);
           setCanRedirect(true);
         });
@@ -221,4 +213,4 @@ const CreateGrammarPage = props => {
   );
 };
 
-export default withSnackbar(CreateGrammarPage);
+export default CreateGrammarPage;
