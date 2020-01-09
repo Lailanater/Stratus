@@ -5,3 +5,4 @@ VXMLGenerator.properties
 build
 dist
 node_modules
+secrets.go
