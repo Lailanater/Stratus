@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { Auth0Provider } from '../react-auth0-spa';
 
-const Wrapper = props => {
+const Wrappers = props => {
   const theme = useSelector(state => state.theme);
   let currentTheme = createMuiTheme({
     palette: {
@@ -16,9 +17,11 @@ const Wrapper = props => {
 
   return (
     <ThemeProvider theme={currentTheme}>
-      <SnackbarProvider maxSnack={2}>{props.children}</SnackbarProvider>
+      <Auth0Provider>
+        <SnackbarProvider maxSnack={2}>{props.children}</SnackbarProvider>
+      </Auth0Provider>
     </ThemeProvider>
   );
 };
 
-export default Wrapper;
+export default Wrappers;

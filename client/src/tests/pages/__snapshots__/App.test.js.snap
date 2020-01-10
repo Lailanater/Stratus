@@ -104,7 +104,6 @@ Array [
         <input
           onAnimationStart={[Function]}
           type="hidden"
-          value=""
         />
         <svg
           aria-hidden="true"
