@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import SideMenu from '../pages/SideMenu';
 import { Link } from 'react-router-dom';
 import { toggleAppMenu } from '../redux/actions/actionCreators';
+import LoginOrOut from './LoginOrOut';
 
 const Header = props => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Header = props => {
           <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
             <Typography variant="h5">Stratus</Typography>
           </Link>
+          <LoginOrOut />
         </Toolbar>
       </AppBar>
       <SideMenu />
