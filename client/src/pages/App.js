@@ -1,5 +1,5 @@
 import React from 'react';
-import Wrappers from '../components/Wrappers';
+import Wrapper from '../components/Wrapper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import Header from '../components/Header';
@@ -22,7 +22,7 @@ store.subscribe(() => {
 function App() {
   return (
     <Provider store={store}>
-      <Wrappers>
+      <Wrapper>
         <CssBaseline />
         <BrowserRouter>
           <Header />
@@ -34,7 +34,7 @@ function App() {
           <Route path="/createGrammar" component={CreateGrammarPage} />
           <Route path="/createMenu" component={CreateMenuPage} />
         </BrowserRouter>
-      </Wrappers>
+      </Wrapper>
     </Provider>
   );
 }

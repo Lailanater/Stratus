@@ -38,6 +38,7 @@ exports[`renders without crashing 1`] = `
       <input
         onAnimationStart={[Function]}
         type="hidden"
+        value=""
       />
       <svg
         aria-hidden="true"
