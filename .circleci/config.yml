@@ -47,8 +47,8 @@ jobs:
           name: Auth gcloud
           command: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
 
-      -run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID} && gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID} && gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
-      -run:
+      - run:
         name: Deploy server
         command: cd server && gcloud app deploy
