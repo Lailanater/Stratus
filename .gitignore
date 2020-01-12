@@ -6,4 +6,4 @@ build
 dist
 node_modules
 secrets.go
-firebaseConfig.js
+.env
