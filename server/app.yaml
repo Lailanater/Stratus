@@ -1,2 +1,2 @@
-runtime: go
+runtime: go112
 main: ./src
