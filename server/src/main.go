@@ -95,7 +95,6 @@ func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	setSecrets()
 	fmt.Println("Listening...")
 	http.HandleFunc("/api/createMenu", createMenuHandler)
 	http.HandleFunc("/api/createGrammar", createGrammarHandler)
