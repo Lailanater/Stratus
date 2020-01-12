@@ -36,8 +36,9 @@ jobs:
       # run tests!
       - run: yarn test-client
 
-      - run: yarn global add firebase
+      # deploy the app
+      - run: yarn build
 
       - run:
           name: Deploy Master to Firebase
-          command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
