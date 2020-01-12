@@ -53,4 +53,4 @@ jobs:
 
       - run:
           name: Deploy server
-          command: cd server && gcloud app deploy
+          command: cd server && gcloud init && gcloud app deploy
