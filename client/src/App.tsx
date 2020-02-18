@@ -7,7 +7,7 @@ interface Props {
 export const App: React.FC<Props> = () => {
   return (
     <div>
-
+      
     </div>
   );
 };
