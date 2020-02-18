@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
+import { Home } from "./Home";
 
-interface Props {
-
-}
+interface Props {}
 
 export const App: React.FC<Props> = () => {
   return (
-    <div>
-      
+    <div className="vh-100" style={{ backgroundColor: "#303030" }}>
+      <Home />
     </div>
   );
 };
