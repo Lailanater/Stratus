@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  Row,
-  Table
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { Header } from "../components/Header";
 
 interface Props {}
 
@@ -25,15 +19,7 @@ export const Home: React.FC<Props> = () => {
 
   return (
     <>
-      <Navbar bg="info" variant="dark">
-        <Navbar.Brand className="px-3">Stratus</Navbar.Brand>
-        <Navbar.Collapse>
-          <Nav>
-            <Nav.Link>Create Menu</Nav.Link>
-            <Nav.Link>Create Grammar</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <Header />
       <Container>
         <Row className="d-flex justify-content-center">
           <Col md={6}>
@@ -62,7 +48,9 @@ export const Home: React.FC<Props> = () => {
               <tr key={index}>
                 <th>{project.name}</th>
                 <th>{project.path}</th>
-                <th className="d-flex justify-content-center">X</th>
+                <th className="d-flex justify-content-center">
+                  <FontAwesomeIcon icon={faTrashAlt} color="#dc3545" />
+                </th>
               </tr>
             ))}
           </tbody>
