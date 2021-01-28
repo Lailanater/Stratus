@@ -62,7 +62,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "concurrently": "^5.0.0",
-    "electron": "7.0.0",
+    "electron": "9.4.0",
     "electron-builder": "^22.1.0",
     "react-test-renderer": "^16.12.0",
     "wait-on": "^3.3.0"
