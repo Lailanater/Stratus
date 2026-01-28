@@ -1,0 +1,30 @@
+services:
+  client:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - ../client/.env
+    command: bash -c "yarn start"
+    depends_on:
+      - server
+    networks:
+      - stratus-network
+
+  server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    working_dir: /app/server
+    ports:
+      - '8080:8080'
+    command: bash -c "go run ./src/*.go"
+    networks:
+      - stratus-network
+    volumes:
+      - "./projects:/app/server/output"
+
+networks:
+  stratus-network:

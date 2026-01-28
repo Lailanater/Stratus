@@ -38,10 +38,10 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 
 	var tmpl *template.Template
 	if mode == "dtmf" {
-		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "server", "src", "templates", "dtmfGrammarTemplate.gogrxml")))
+		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "src", "templates", "dtmfGrammarTemplate.gogrxml")))
 		mode = "DTMF"
 	} else if mode == "voice" {
-		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "server", "src", "templates", "dtmfGrammarTemplate.gogrxml")))
+		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "src", "templates", "dtmfGrammarTemplate.gogrxml")))
 		mode = "Voice"
 	}
 
@@ -87,7 +87,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 		return false, false
 	}
 
-	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "server", "src", "templates", "menuTemplate.govxml")))
+	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "src", "templates", "menuTemplate.govxml")))
 	data := MenuData{
 		MenuName:       menuName,
 		DtmfOptions:    dtmfOptions,

@@ -1,0 +1,14 @@
+.circleci
+.firebase
+.idea
+.yarn
+**/node_modules
+**/.eslintrc.json
+docker
+.git*
+**/*.md
+LICENSE
+prettier.config.js
+fnox.toml
+client/.env
+.dockerignore
