@@ -1,9 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 	"strconv"
 )
 
@@ -94,10 +97,39 @@ func createGrammarHandler(w http.ResponseWriter, r *http.Request) {
 	SendJsonReply(w, fileCreated, fileExists, shouldOverwrite)
 }
 
+func getProjectsHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	outputDir := "/app/server/output"
+	entries, err := ioutil.ReadDir(outputDir)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var projects []map[string]string
+	for _, entry := range entries {
+		if entry.IsDir() {
+			projects = append(projects, map[string]string{
+				"name": entry.Name(),
+				"path": filepath.Join(outputDir, entry.Name()),
+			})
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	response := map[string]interface{}{
+		"success":  true,
+		"projects": projects,
+	}
+	json.NewEncoder(w).Encode(response)
+}
+
 func main() {
 	fmt.Println("Listening...")
 	http.HandleFunc("/api/createMenu", createMenuHandler)
 	http.HandleFunc("/api/createGrammar", createGrammarHandler)
+	http.HandleFunc("/api/projects", getProjectsHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
