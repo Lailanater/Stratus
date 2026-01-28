@@ -1,0 +1,8 @@
+[tools]
+go = "1.12"
+node = "13"
+yarn = "1"
+
+[tasks.export]
+run = "fnox ex -o ./client/.env"
+description = "Export firebase env variables for the client"

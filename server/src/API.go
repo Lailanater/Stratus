@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"path/filepath"
 	"text/template"
 )
 
@@ -37,10 +38,10 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 
 	var tmpl *template.Template
 	if mode == "dtmf" {
-		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(wd + "\\server\\templates\\dtmfGrammarTemplate.gogrxml"))
+		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "server", "src", "templates", "dtmfGrammarTemplate.gogrxml")))
 		mode = "DTMF"
 	} else if mode == "voice" {
-		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(wd + "\\server\\templates\\dtmfGrammarTemplate.gogrxml"))
+		tmpl = template.Must(template.New("dtmfGrammarTemplate.gogrxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "server", "src", "templates", "dtmfGrammarTemplate.gogrxml")))
 		mode = "Voice"
 	}
 
@@ -52,15 +53,14 @@ func CreateGrammar(menuName, mode, projectPath string, needsRepeat bool, dtmfOpt
 		DtmfOptions: dtmfOptions,
 	}
 
-	permissions := os.FileMode(777)
-	err = os.MkdirAll(projectPath+"/WebContent/grammar/english/", permissions)
+	err = os.MkdirAll(filepath.Join(projectPath, "WebContent", "grammar", "english"), 0755)
 	if err != nil {
 		log.Println("os.MkdirAll")
 		log.Println(err)
 		return false, false
 	}
 
-	pathToFile := projectPath + "/WebContent/grammar/english/" + menuName + "_" + mode + ".grxml"
+	pathToFile := filepath.Join(projectPath, "WebContent", "grammar", "english", menuName+"_"+mode+".grxml")
 	fileExists := doesFileExist(pathToFile)
 	if fileExists {
 		if shouldOverwrite {
@@ -87,7 +87,7 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 		return false, false
 	}
 
-	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles(wd + "/server/templates/menuTemplate.govxml"))
+	tmpl := template.Must(template.New("menuTemplate.govxml").Funcs(funcMap).ParseFiles(filepath.Join(wd, "server", "src", "templates", "menuTemplate.govxml")))
 	data := MenuData{
 		MenuName:       menuName,
 		DtmfOptions:    dtmfOptions,
@@ -95,15 +95,14 @@ func CreateMenu(menuName, defaultRouteTo, projectPath string, dtmfOptions []stri
 		DefaultRouteTo: defaultRouteTo,
 	}
 
-	permissions := os.FileMode(777)
-	err = os.MkdirAll(projectPath+"/WebContent/", permissions)
+	err = os.MkdirAll(filepath.Join(projectPath, "WebContent"), 0755)
 	if err != nil {
 		log.Println("os.MkdirAll")
 		log.Println(err)
 		return false, false
 	}
 
-	pathToFile := projectPath + "/WebContent/" + menuName + ".vxml"
+	pathToFile := filepath.Join(projectPath, "WebContent", menuName+".vxml")
 	fileExists := doesFileExist(pathToFile)
 	if fileExists {
 		if shouldOverwrite {
