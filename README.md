@@ -10,24 +10,11 @@ The backend of Stratus is created in **Golang**
 
 **⚠️ IMPORTANT**: Before starting the Docker containers, you must complete these prerequisites:
 
-1. **Create projects directory structure**: The application requires at least one project folder to function properly:
+**Create projects directory structure**: The application requires at least one project folder to function properly:
 
 ```shell script
 # Create the required directory structure
-mkdir -p docker/projects/test
-```
-
-2. **Create environment file**: You must have a `.env` file defined in the client directory:
-
-```shell script
-# Create the required .env file
-touch client/.env
-```
-
-_Alternatively, if you have [mise](https://mise.jdx.dev/) and [fnox](https://fnox.jdx.dev/) installed, you can use:_
-
-```shell script
-mise run export
+mkdir -p docker/projects/example
 ```
 
 You can start Stratus using Docker in two ways:
@@ -35,7 +22,7 @@ You can start Stratus using Docker in two ways:
 **Option 1: With [mise](https://mise.jdx.dev/) installed**
 
 ```shell script
-mise run docker:up
+mise run up
 ```
 
 **Option 2: Manually**

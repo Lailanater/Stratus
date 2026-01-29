@@ -11,16 +11,21 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseConfig from '../firebaseConfig';
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-const firebaseAppAuth = firebaseApp.auth();
-const providers = {
-  githubProvider: new firebase.auth.GithubAuthProvider()
-};
-
 const Header = props => {
   const dispatch = useDispatch();
   const { user, signOut, signInWithGithub } = props;
+
+  function getAuthButton() {
+    if (!signInWithGithub && !signOut) {
+      return null;
+    }
+
+    if (user) {
+      return <Button onClick={signOut}>Sign Out</Button>;
+    } else {
+      return <Button onClick={signInWithGithub}>Sign In</Button>;
+    }
+  }
 
   return (
     <div>
@@ -37,11 +42,7 @@ const Header = props => {
           <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
             <Typography variant="h5">Stratus</Typography>
           </Link>
-          {user ? (
-            <Button onClick={signOut}>Sign Out</Button>
-          ) : (
-            <Button onClick={signInWithGithub}>Sign In</Button>
-          )}
+          {getAuthButton()}
         </Toolbar>
       </AppBar>
       <SideMenu />
@@ -49,7 +50,20 @@ const Header = props => {
   );
 };
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth
-})(Header);
+let ExportedComponent = Header;
+
+try {
+  const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+  const firebaseAppAuth = firebaseApp.auth();
+  const providers = {
+    githubProvider: new firebase.auth.GithubAuthProvider()
+  };
+
+  ExportedComponent = withFirebaseAuth({
+    providers,
+    firebaseAppAuth
+  })(Header);
+} catch {}
+
+export default ExportedComponent;
