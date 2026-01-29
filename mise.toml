@@ -6,3 +6,13 @@ yarn = "1"
 [tasks.export]
 run = "fnox ex -o ./client/.env"
 description = "Export firebase env variables for the client"
+
+[tasks."docker:up"]
+run = "docker-compose up -d --build"
+dir = "docker"
+description = "Run Stratus in a docker container without the need to install dependencies on local machine"
+
+[tasks."docker:down"]
+run = "docker-compose down"
+dir = "docker"
+description = "Teardown Stratus docker container"
