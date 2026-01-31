@@ -1,5 +1,6 @@
 services:
   client:
+    container_name: stratus-client
     build:
       context: ..
       dockerfile: docker/Dockerfile
@@ -11,24 +12,25 @@ services:
       - REACT_APP_FIREBASE_SENDER_ID=${REACT_APP_FIREBASE_SENDER_ID}
       - REACT_APP_FIREBASE_APP_ID=${REACT_APP_FIREBASE_APP_ID}
       - REACT_APP_FIREBASE_MEASUREMENT_ID=${REACT_APP_FIREBASE_MEASUREMENT_ID}
-    command: bash -c "yarn start"
+    command: bash -c "serve -s client"
     depends_on:
       - server
     networks:
       - stratus-network
 
   server:
+    container_name: stratus-server
     build:
       context: ..
       dockerfile: docker/Dockerfile
     working_dir: /app/server
     ports:
       - '8080:8080'
-    command: bash -c "go run ./src/*.go"
+    command: bash -c "./stratus-server"
     networks:
       - stratus-network
     volumes:
-      - "./projects:/app/server/output"
+      - './projects:/app/server/output'
 
 networks:
   stratus-network:

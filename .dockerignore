@@ -11,4 +11,5 @@ LICENSE
 prettier.config.js
 fnox.toml
 client/.env
+client/build
 .dockerignore
